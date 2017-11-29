@@ -22,3 +22,9 @@
 hs_err_pid*
 target
 build
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+*.iws
+**/.idea/dictionaries
+**/.idea/vcs.xml
+**/.idea/jsLibraryMappings.xml
