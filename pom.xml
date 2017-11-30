@@ -16,7 +16,7 @@
         <archiveClasses>true</archiveClasses>
         <gae.version>1.9.59</gae.version>
         <junit.version>4.12</junit.version>
-        <restlet.version>2.3.1</restlet.version>
+        <restlet.version>2.3.10</restlet.version>
         <guava.version>22.0</guava.version>
         <objectify.version>5.1.21</objectify.version>
         <ase.group29.app.id>ase2017-group-2-9</ase.group29.app.id>
@@ -65,6 +65,22 @@
         <dependency>
             <groupId>org.restlet.gae</groupId>
             <artifactId>org.restlet.ext.json</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.restlet.gae</groupId>
+            <artifactId>org.restlet.ext.jackson</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.restlet.gae</groupId>
+            <artifactId>org.restlet.ext.swagger</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.jetty</artifactId>
             <version>${restlet.version}</version>
         </dependency>
         <!-- [END Restlet_Dependencies] -->
@@ -245,7 +261,7 @@
             <!--<transformers>-->
             <!--<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
             <!--<manifestEntries>-->
-            <!--<Main-Class>net.apispark.webapi.WebApiHost</Main-Class>-->
+            <!--<Main-Class>de.tum.ase.WebApiHost</Main-Class>-->
             <!--</manifestEntries>-->
             <!--</transformer>-->
             <!--</transformers>-->
@@ -261,6 +277,11 @@
             <id>maven-restlet</id>
             <name>Public online Restlet repository</name>
             <url>http://maven.restlet.com</url>
+        </repository>
+        <repository>
+            <id>mulesoft-releases</id>
+            <name>MuleSoft Releases Repository</name>
+            <url>https://repository-master.mulesoft.org/releases/</url>
         </repository>
     </repositories>
 </project>
