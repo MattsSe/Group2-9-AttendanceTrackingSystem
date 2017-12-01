@@ -1,7 +1,5 @@
 package de.tum.ase.restapi.representation;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.ArrayList;
 
 public class Group {
@@ -20,15 +18,15 @@ public class Group {
     }
 
 
-    private String maxSpots;
+    private String maxSlots;
 
     
-    public String getMaxSpots() {
-        return maxSpots;
+    public String getMaxSlots() {
+        return maxSlots;
     }
 
-    public void setMaxSpots(String maxSpots) {
-        this.maxSpots = maxSpots;
+    public void setMaxSlots(String maxSlots) {
+        this.maxSlots = maxSlots;
     }
 
 

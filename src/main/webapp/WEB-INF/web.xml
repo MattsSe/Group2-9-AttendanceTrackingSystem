@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>dist/index.html</welcome-file>
   </welcome-file-list>
 
     <servlet>
@@ -18,7 +18,7 @@
 
     <servlet-mapping>
         <servlet-name>RestletServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
     <!-- [START Objectify] -->

@@ -5,18 +5,18 @@ import org.restlet.resource.ResourceException;
 
 import java.util.logging.Level;
 
-import de.tum.ase.restapi.resource.GroupsResource;
+import de.tum.ase.restapi.resource.RecordsResource;
 
-public class GroupsServerResource extends AbstractServerResource implements GroupsResource {
+public class RecordsServerResource extends AbstractServerResource implements RecordsResource {
 
     // Define allowed roles for the method "get".
-    private static final String[] get1AllowedGroups = new String[] {"anyone"};
+    private static final String[] get16AllowedGroups = new String[] {"anyone"};
     // Define denied roles for the method "get".
-    private static final String[] get1DeniedGroups = new String[] {};
+    private static final String[] get16DeniedGroups = new String[] {};
 
-    public de.tum.ase.restapi.representation.Group represent() throws Exception {
-       de.tum.ase.restapi.representation.Group result = null;
-        checkGroups(get1AllowedGroups, get1DeniedGroups);
+    public de.tum.ase.restapi.representation.AttendanceRecord represent() throws Exception {
+       de.tum.ase.restapi.representation.AttendanceRecord result = null;
+        checkGroups(get16AllowedGroups, get16DeniedGroups);
         
 
         try {
@@ -24,7 +24,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
         // Query parameters
         
         	
-	    result = new de.tum.ase.restapi.representation.Group();
+	    result = new de.tum.ase.restapi.representation.AttendanceRecord();
 	    
 	    // Initialize here your bean
          } catch (Exception ex) {
@@ -38,26 +38,18 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
     }
 
     // Define allowed roles for the method "post".
-    private static final String[] post2AllowedGroups = new String[] {"anyone"};
+    private static final String[] post17AllowedGroups = new String[] {"anyone"};
     // Define denied roles for the method "post".
-    private static final String[] post2DeniedGroups = new String[] {};
+    private static final String[] post17DeniedGroups = new String[] {};
 
-    public de.tum.ase.restapi.representation.Group add(de.tum.ase.restapi.representation.Group bean) throws Exception {
-       de.tum.ase.restapi.representation.Group result = null;
-        checkGroups(post2AllowedGroups, post2DeniedGroups);
+    public void add(de.tum.ase.restapi.representation.AttendanceRecord bean) throws Exception {
+        checkGroups(post17AllowedGroups, post17DeniedGroups);
         
     	if (bean==null) {
     		throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
     	}
 
         try {
-		
-        // Query parameters
-        
-        	
-	    result = new de.tum.ase.restapi.representation.Group();
-	    
-	    // Initialize here your bean
          } catch (Exception ex) {
             // In a real code, customize handling for each type of exception
             getLogger().log(Level.WARNING, "Error when executing the method", ex);
@@ -65,7 +57,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
                     ex.getMessage(), ex);
         }
     
-        return result;
+        
     }
 
 

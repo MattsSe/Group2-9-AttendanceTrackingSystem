@@ -1,7 +1,5 @@
 package de.tum.ase.restapi.representation;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Student {
     /** Default serial version ID. */
     private static final long serialVersionUID = 1L;

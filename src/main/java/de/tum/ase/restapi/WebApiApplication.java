@@ -19,6 +19,9 @@ import de.tum.ase.restapi.resource.server.GroupsStudentsServerResource;
 import de.tum.ase.restapi.resource.server.StudentServerResource;
 import de.tum.ase.restapi.resource.server.StudentLoginServerResource;
 import de.tum.ase.restapi.resource.server.StudentLogoutServerResource;
+import de.tum.ase.restapi.resource.server.StudentStudentidQrServerResource;
+import de.tum.ase.restapi.resource.server.RecordsServerResource;
+import de.tum.ase.restapi.resource.server.RecordsAttendanceidServerResource;
 
 public class WebApiApplication extends Application {
 
@@ -42,6 +45,12 @@ public class WebApiApplication extends Application {
     public static final String ROUTE_STUDENTLOGIN = "/student/login";
 
     public static final String ROUTE_STUDENTLOGOUT = "/student/logout";
+
+    public static final String ROUTE_STUDENTSTUDENTIDQR = "/student/{studentid}/qr";
+
+    public static final String ROUTE_RECORDS = "/records/";
+
+    public static final String ROUTE_RECORDSATTENDANCEID = "/records/{attendanceid}/";
 
 
     /*
@@ -126,14 +135,15 @@ public class WebApiApplication extends Application {
         apiRouter.attach(ROUTE_STUDENT, StudentServerResource.class);
         apiRouter.attach(ROUTE_STUDENTLOGIN, StudentLoginServerResource.class);
         apiRouter.attach(ROUTE_STUDENTLOGOUT, StudentLogoutServerResource.class);
+        apiRouter.attach(ROUTE_STUDENTSTUDENTIDQR, StudentStudentidQrServerResource.class);
+        apiRouter.attach(ROUTE_RECORDS.substring(0, ROUTE_RECORDS.length()-1), RecordsServerResource.class);
+        apiRouter.attach(ROUTE_RECORDS, RecordsServerResource.class);
+        apiRouter.attach(ROUTE_RECORDSATTENDANCEID.substring(0, ROUTE_RECORDSATTENDANCEID.length()-1), RecordsAttendanceidServerResource.class);
+        apiRouter.attach(ROUTE_RECORDSATTENDANCEID, RecordsAttendanceidServerResource.class);
 
         return apiRouter;
 	}
 
-    /**
-     * Creates a root Restlet that will receive all incoming calls.
-     */
-	@Override
     public Restlet createInboundRoot() {
 
         // Router for the API's resources

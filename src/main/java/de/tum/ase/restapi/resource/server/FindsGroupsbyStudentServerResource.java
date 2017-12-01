@@ -1,7 +1,6 @@
 package de.tum.ase.restapi.resource.server;
 
 import org.restlet.data.Status;
-import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.resource.ResourceException;
 
 import java.util.logging.Level;

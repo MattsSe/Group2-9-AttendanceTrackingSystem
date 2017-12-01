@@ -36,9 +36,9 @@ public abstract class AbstractServerResource extends ServerResource {
      * Indicates if the given list of {@link Role} matches the list of allowed
      * and denied roles.
      * 
-     * @param allowedGroups
+     * @param allowedRoles
      *            The list of allowed roles.
-     * @param deniedGroups
+     * @param deniedRoles
      *            The list of denied roles.
      * @param userRoles
      *            The list of roles to check.
