@@ -28,5 +28,5 @@ build
 **/.idea/dictionaries
 **/.idea/vcs.xml
 **/.idea/jsLibraryMappings.xml
-/src/main/webapp/dist/
+**/webapp/dist/
 *js.map
