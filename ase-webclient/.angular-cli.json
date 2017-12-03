@@ -1,16 +1,14 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
+    "version": "1.0.1",
     "name": "ase-webclient"
   },
   "apps": [
     {
       "root": "src",
       "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "assets": ["assets"],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -19,11 +17,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "scss/style.scss",
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/font-awesome/css/font-awesome.css"
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/simple-line-icons/css/simple-line-icons.css",
+        "scss/style.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/chart.js/dist/Chart.bundle.min.js",
+        "../node_modules/chart.js/dist/Chart.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -57,6 +58,6 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "prefixInterfaces": false
   }
 }
