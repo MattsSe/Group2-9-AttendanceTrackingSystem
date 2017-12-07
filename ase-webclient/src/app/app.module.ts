@@ -11,6 +11,7 @@ import {AuthGuard} from './guards/auth.guard';
 import {AlertService, AuthenticationService, StudentService, LoggingService} from './services/index';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 
 // Import containers
 import {
@@ -71,9 +72,9 @@ import {AppRoutingModule} from './app.routing';
 import {HttpClientModule} from '@angular/common/http';
 
 // Import 3rd party components
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {ChartsModule} from 'ng2-charts/ng2-charts';
 
 @NgModule({
   imports: [
@@ -91,9 +92,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AlertComponent,
     HomeComponent,
     LoginComponent,
+    RegisterComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
-    ...APP_DIRECTIVES
+    ...APP_DIRECTIVES,
+    RegisterComponent
   ],
   providers: [
     customHttpProvider,

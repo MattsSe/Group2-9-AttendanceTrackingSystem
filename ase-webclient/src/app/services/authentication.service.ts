@@ -4,11 +4,15 @@ import {HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {LoggingService} from './logging.service';
-import {Student} from '../models/student';
-import {User} from '../models/user';
+import {Student} from '../model/student';
+import {User} from '../model/user';
+import {appConfig} from '../app.config';
 
 @Injectable()
 export class AuthenticationService {
+
+  private loginPath = appConfig.apiUrl + 'student/login';
+
   constructor(private http: HttpClient, private log: LoggingService) {
   }
 
@@ -17,12 +21,12 @@ export class AuthenticationService {
     const headers = new HttpHeaders();
     headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
 
-    const response = await this.http.post('/students/login', {username: username, password: password}).toPromise();
+    const response = await this.http.post(this.loginPath, null, {headers: headers}).toPromise();
     try {
-      const user = response as User;
-      if (user) {
+      const student = response as Student;
+      if (student) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentStudent', JSON.stringify(user));
+        localStorage.setItem('currentStudent', JSON.stringify(student));
       }
     } catch (err) {
       this.log.log('login failed', err.message);
