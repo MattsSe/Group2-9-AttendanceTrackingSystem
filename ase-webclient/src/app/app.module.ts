@@ -75,6 +75,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
+import { GroupsComponent } from './groups/groups.component';
+import { AttendanceLogsComponent } from './attendance-logs/attendance-logs.component';
 
 @NgModule({
   imports: [
@@ -96,7 +98,9 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES,
-    RegisterComponent
+    RegisterComponent,
+    GroupsComponent,
+    AttendanceLogsComponent
   ],
   providers: [
     customHttpProvider,

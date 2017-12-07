@@ -9,6 +9,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     DashboardRoutingModule,
     ChartsModule
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [ DashboardComponent]
 })
 export class DashboardModule { }

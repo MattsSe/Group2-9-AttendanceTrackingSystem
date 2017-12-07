@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-align-justify"></i> Attendance logs for {{title}}
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Tutorial Group ID</th>
+        <th>Week</th>
+        <th>Presented</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <tr *ngFor="let record of getAttendanceRecords()">
+        <td>{{ record.studentId}}</td>
+        <td>{{ record.tutorialGroupId}}</td>
+        <td>{{ record.weekId}}</td>
+        <td>
+          <span class="badge" [ngClass]="{'badge-success': record.presented, 'badge-danger': !record.presented}">{{ record.presented ? 'yes' : 'no'}}</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <nav>
+      <ul class="pagination">
+        <li class="page-item">
+          <button [disabled]="currentIndex <= 1" (click)="displayItems(currentIndex - 1)" class="page-link">Prev
+          </button>
+        </li>
+        <li class="page-item" [ngClass]="{'active': currentIndex === 1}">
+          <button [disabled]="1 === currentIndex" (click)="displayItems(1)" class="page-link">1</button>
+        </li>
+        <li class="page-item" *ngFor="let item of pageItems()" [ngClass]="{'active': currentIndex === item}">
+          <button [disabled]="item === currentIndex" (click)="displayItems(item)" class="page-link">{{item}}</button>
+        </li>
+        <li class="page-item">
+          <button [disabled]="pageItems().length +1 === currentIndex" (click)="displayItems(currentIndex + 1)"
+                  class="page-link">Next
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

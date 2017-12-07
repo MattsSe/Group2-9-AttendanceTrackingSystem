@@ -2,12 +2,12 @@
  * Created by Matthias on 30.11.17.
  */
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './home/home.component';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
-import {AuthGuard} from './guards/auth.guard';
 import {FullLayoutComponent} from './containers/index';
-import {RegisterComponent} from "./register/register.component";
+import {RegisterComponent} from './register/register.component';
+import {GroupsComponent} from './groups/groups.component';
+import {AttendanceLogsComponent} from "./attendance-logs/attendance-logs.component";
 
 export const routes: Routes = [
   // {path: '', component: HomeComponent}, //
@@ -29,8 +29,25 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
-      }
+      },
+      {
+        path: 'groups', component: GroupsComponent, data: {
+          title: 'Groups'
+        }
+      },
+      {
+        path: 'group-logs/:groupId', component: AttendanceLogsComponent, data: {
+          title: 'Logs'
+        }
+      },
+      {
+        // canActivate: [AuthGuard]
+        path: 'logs/:userId', component: AttendanceLogsComponent, data: {
+          title: 'Logs'
+        }
+      },
     ]
+
   },
   // otherwise redirect to home
   {path: '**', redirectTo: ''}

@@ -1,8 +1,11 @@
-import { NgModule } from '@angular/core';
-import { Routes,
-     RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {
+  Routes,
+  RouterModule
+} from '@angular/router';
 
-import { DashboardComponent } from './dashboard.component';
+import {DashboardComponent} from './dashboard.component';
+import {GroupsComponent} from '../../groups/groups.component';
 
 const routes: Routes = [
   {
@@ -11,11 +14,12 @@ const routes: Routes = [
     data: {
       title: 'Dashboard'
     }
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule {
+}

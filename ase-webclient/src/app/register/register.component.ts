@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
 
 
   register() {
+    // send post request ot create a new student
     console.log('registered');
   }
 
