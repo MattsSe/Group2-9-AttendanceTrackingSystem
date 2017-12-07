@@ -7,7 +7,8 @@ import {LoginComponent} from './login/login.component';
 import {FullLayoutComponent} from './containers/index';
 import {RegisterComponent} from './register/register.component';
 import {GroupsComponent} from './groups/groups.component';
-import {AttendanceLogsComponent} from "./attendance-logs/attendance-logs.component";
+import {AttendanceLogsComponent} from './attendance-logs/attendance-logs.component';
+import {NotAuthorizedComponent} from './not-authorized/not-authorized.component';
 
 export const routes: Routes = [
   // {path: '', component: HomeComponent}, //
@@ -42,15 +43,22 @@ export const routes: Routes = [
       },
       {
         // canActivate: [AuthGuard]
-        path: 'logs/:userId', component: AttendanceLogsComponent, data: {
+        path: 'logs', component: AttendanceLogsComponent, pathMatch: 'full', data: {
           title: 'Logs'
-        }
+        },
+      },
+      {
+        // canActivate: [AuthGuard]
+        path: 'logs/:userId', component: AttendanceLogsComponent, pathMatch: 'full', data: {
+          title: 'Logs'
+        },
       },
     ]
 
   },
   // otherwise redirect to home
-  {path: '**', redirectTo: ''}
+  {path: 'unauthorized', component: NotAuthorizedComponent},
+  {path: '**', redirectTo: ''},
 ];
 
 @NgModule({

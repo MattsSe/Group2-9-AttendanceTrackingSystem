@@ -12,7 +12,7 @@
   </div>
   <div class="row main">
     <div class="main-login main-center">
-      <form name="form" class="form-horizontal"  (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+      <form name="form" class="form-horizontal"  (ngSubmit)="f.form.valid && registerAndLogin()" #f="ngForm" novalidate>
 
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
           <label for="firstName" class="cols-sm-2 control-label">Your First Name</label>

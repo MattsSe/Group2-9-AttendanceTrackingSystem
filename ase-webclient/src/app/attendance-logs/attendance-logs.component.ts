@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AttendanceRecord, Group} from '../model';
-import {ActivatedRoute} from '@angular/router';
+import {AttendanceRecord, Group, Student} from '../model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-attendance-logs',
@@ -18,7 +18,7 @@ export class AttendanceLogsComponent implements OnInit, OnDestroy {
   attendanceRecords: AttendanceRecord[];
   currentIndex = 1;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router) {
   }
 
   private addDummyData() {
@@ -39,6 +39,15 @@ export class AttendanceLogsComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.groupId = +params['groupId']; // (+) converts string 'id' to a number
       this.userId = +params['userId'];
+
+      if (!this.groupId && !this.userId) {
+        const student = localStorage.getItem('currentStudent') as Student;
+        if (student) {
+          this.userId = +student.id;
+        } else {
+          this.router.navigate(['/unauthorized']);
+        }
+      }
 
       this.title = this.groupId ? `Group ${this.groupId}` : `User ${this.userId}`;
 

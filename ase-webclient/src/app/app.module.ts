@@ -77,6 +77,7 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import { GroupsComponent } from './groups/groups.component';
 import { AttendanceLogsComponent } from './attendance-logs/attendance-logs.component';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 @NgModule({
   imports: [
@@ -100,7 +101,8 @@ import { AttendanceLogsComponent } from './attendance-logs/attendance-logs.compo
     ...APP_DIRECTIVES,
     RegisterComponent,
     GroupsComponent,
-    AttendanceLogsComponent
+    AttendanceLogsComponent,
+    NotAuthorizedComponent
   ],
   providers: [
     customHttpProvider,
