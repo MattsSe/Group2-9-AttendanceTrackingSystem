@@ -1,8 +1,8 @@
 package de.tum.ase.restapi.utils;
 
-import java.util.Date;
-
 import org.restlet.engine.util.StringUtils;
+
+import java.util.Date;
 
 public class BindingUtils {
 

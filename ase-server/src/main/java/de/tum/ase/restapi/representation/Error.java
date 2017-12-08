@@ -1,10 +1,14 @@
 package de.tum.ase.restapi.representation;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+
+@Entity
 public class Error {
     /** Default serial version ID. */
     private static final long serialVersionUID = 1L;
 
-    private String code;
+   @Id private String code;
 
     
     public String getCode() {

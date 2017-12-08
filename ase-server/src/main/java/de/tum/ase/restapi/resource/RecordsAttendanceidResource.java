@@ -1,8 +1,8 @@
 package de.tum.ase.restapi.resource;
 
+import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Put;
-import org.restlet.resource.Delete;
 
 public interface RecordsAttendanceidResource {
 

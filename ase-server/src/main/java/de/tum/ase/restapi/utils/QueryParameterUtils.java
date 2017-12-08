@@ -1,9 +1,9 @@
 package de.tum.ase.restapi.utils;
 
-import java.util.Date;
-
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
+
+import java.util.Date;
 
 public class QueryParameterUtils {
 

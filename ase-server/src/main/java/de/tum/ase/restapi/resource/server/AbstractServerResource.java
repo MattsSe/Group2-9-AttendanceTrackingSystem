@@ -1,14 +1,13 @@
 package de.tum.ase.restapi.resource.server;
 
-import java.util.List;
-
-import org.restlet.resource.ServerResource;
-import org.restlet.resource.ResourceException;
+import de.tum.ase.restapi.WebApiApplication;
 import org.restlet.data.Reference;
 import org.restlet.data.Status;
+import org.restlet.resource.ResourceException;
+import org.restlet.resource.ServerResource;
 import org.restlet.security.Role;
 
-import de.tum.ase.restapi.WebApiApplication;
+import java.util.List;
 
 /**
  * Defines common behaviour of server resources.

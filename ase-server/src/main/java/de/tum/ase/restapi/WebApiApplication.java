@@ -1,27 +1,17 @@
 package de.tum.ase.restapi;
 
+import de.tum.ase.restapi.resource.server.*;
+import de.tum.ase.restapi.verify.AseRealm;
+import de.tum.ase.restapi.verify.AseVeryfier;
+import de.tum.ase.restapi.verify.SecurityDao;
 import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.routing.Router;
 import org.restlet.security.ChallengeAuthenticator;
-import org.restlet.service.CorsService;
-import org.restlet.security.MemoryRealm;
-import org.restlet.security.User;
 import org.restlet.security.Role;
-
-import de.tum.ase.restapi.resource.server.GroupsServerResource;
-import de.tum.ase.restapi.resource.server.GroupsGroupidServerResource;
-import de.tum.ase.restapi.resource.server.GroupsGroupidStudentsServerResource;
-import de.tum.ase.restapi.resource.server.GroupsGroupidStudentsStudentidServerResource;
-import de.tum.ase.restapi.resource.server.FindsGroupsbyStudentServerResource;
-import de.tum.ase.restapi.resource.server.GroupsStudentsServerResource;
-import de.tum.ase.restapi.resource.server.StudentServerResource;
-import de.tum.ase.restapi.resource.server.StudentLoginServerResource;
-import de.tum.ase.restapi.resource.server.StudentLogoutServerResource;
-import de.tum.ase.restapi.resource.server.StudentStudentidQrServerResource;
-import de.tum.ase.restapi.resource.server.RecordsServerResource;
-import de.tum.ase.restapi.resource.server.RecordsAttendanceidServerResource;
+import org.restlet.security.User;
+import org.restlet.service.CorsService;
 
 public class WebApiApplication extends Application {
 
@@ -42,15 +32,21 @@ public class WebApiApplication extends Application {
 
     public static final String ROUTE_STUDENT = "/student/";
 
-    public static final String ROUTE_STUDENTLOGIN = "/student/login";
+    public static final String ROUTE_STUDENTAUTH = "/student/auth";
 
     public static final String ROUTE_STUDENTLOGOUT = "/student/logout";
 
     public static final String ROUTE_STUDENTSTUDENTIDQR = "/student/{studentid}/qr";
 
+    public static final String ROUTE_STUDENTREGISTER = "/student/register";
+
     public static final String ROUTE_RECORDS = "/records/";
 
     public static final String ROUTE_RECORDSATTENDANCEID = "/records/{attendanceid}/";
+
+    public static final String ROUTE_RECORDSGROUPSGROUPID = "/records/groups/{groupId}";
+
+    public static final String ROUTE_RECORDSSTUDENTSSTUDENTID = "/records/students/{studentId}";
 
 
     /*
@@ -66,6 +62,10 @@ public class WebApiApplication extends Application {
 
     public static final String ROLE_USER = "cellroleuser";
 
+    public static final String ROLE_TUTOR = "cellroletutor";
+
+    private SecurityDao securityDao;
+
     private String versionFull;
 
     private int versionMajor;
@@ -75,6 +75,7 @@ public class WebApiApplication extends Application {
     private int versionMinor;
     
     public WebApiApplication() {
+        securityDao = new SecurityDao();
     	setName("aseAttendanceApi");
         CorsService corsService = new CorsService();
         corsService.setAllowedCredentials(true);
@@ -88,7 +89,7 @@ public class WebApiApplication extends Application {
                 getContext(), ChallengeScheme.HTTP_BASIC, "realm");
 
         // Create in-memory users and roles.
-        MemoryRealm realm = new MemoryRealm();
+        AseRealm realm = new AseRealm();
         User owner = new User("owner", "owner");
         realm.getUsers().add(owner);
         realm.map(owner, Role.get(this, ROLE_OWNER));
@@ -104,8 +105,13 @@ public class WebApiApplication extends Application {
         realm.getUsers().add(user);
         realm.map(user, Role.get(this, ROLE_USER));
 
+
+        AseVeryfier verifier = new AseVeryfier(this.securityDao);
+
+        // TODO
         // Verifier : to check authentication
         apiGuard.setVerifier(realm.getVerifier());
+
         // Enroler : add authorization roles
         apiGuard.setEnroler(realm.getEnroler());
 
@@ -121,7 +127,7 @@ public class WebApiApplication extends Application {
 
         return apiGuard;
     }
-    
+
     public Router createApiRouter() {
         Router apiRouter = new Router(getContext());
         apiRouter.attach(ROUTE_GROUPS.substring(0, ROUTE_GROUPS.length()-1), GroupsServerResource.class);
@@ -133,16 +139,19 @@ public class WebApiApplication extends Application {
         apiRouter.attach(ROUTE_GROUPSSTUDENTS, GroupsStudentsServerResource.class);
         apiRouter.attach(ROUTE_STUDENT.substring(0, ROUTE_STUDENT.length()-1), StudentServerResource.class);
         apiRouter.attach(ROUTE_STUDENT, StudentServerResource.class);
-        apiRouter.attach(ROUTE_STUDENTLOGIN, StudentLoginServerResource.class);
+        apiRouter.attach(ROUTE_STUDENTAUTH, StudentAuthServerResource.class);
         apiRouter.attach(ROUTE_STUDENTLOGOUT, StudentLogoutServerResource.class);
         apiRouter.attach(ROUTE_STUDENTSTUDENTIDQR, StudentStudentidQrServerResource.class);
+        apiRouter.attach(ROUTE_STUDENTREGISTER, StudentRegisterServerResource.class);
         apiRouter.attach(ROUTE_RECORDS.substring(0, ROUTE_RECORDS.length()-1), RecordsServerResource.class);
         apiRouter.attach(ROUTE_RECORDS, RecordsServerResource.class);
         apiRouter.attach(ROUTE_RECORDSATTENDANCEID.substring(0, ROUTE_RECORDSATTENDANCEID.length()-1), RecordsAttendanceidServerResource.class);
         apiRouter.attach(ROUTE_RECORDSATTENDANCEID, RecordsAttendanceidServerResource.class);
+        apiRouter.attach(ROUTE_RECORDSGROUPSGROUPID, RecordsGroupsGroupIdServerResource.class);
+        apiRouter.attach(ROUTE_RECORDSSTUDENTSSTUDENTID, RecordsStudentsStudentIdServerResource.class);
 
         return apiRouter;
-	}
+    }
 
     public Restlet createInboundRoot() {
 

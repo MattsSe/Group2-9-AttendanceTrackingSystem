@@ -1,5 +1,9 @@
 package de.tum.ase.restapi.representation;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+
+@Entity
 public class Student {
     /** Default serial version ID. */
     private static final long serialVersionUID = 1L;
@@ -40,7 +44,7 @@ public class Student {
     }
 
 
-    private String id;
+    @Id private String id;
 
     
     public String getId() {

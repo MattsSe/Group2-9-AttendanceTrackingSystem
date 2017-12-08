@@ -1,13 +1,12 @@
 package de.tum.ase.restapi.resource.server;
 
+import de.tum.ase.restapi.resource.StudentAuthResource;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
 import java.util.logging.Level;
 
-import de.tum.ase.restapi.resource.StudentLoginResource;
-
-public class StudentLoginServerResource extends AbstractServerResource implements StudentLoginResource {
+public class StudentAuthServerResource extends AbstractServerResource implements StudentAuthResource {
 
     // Define allowed roles for the method "post".
     private static final String[] post13AllowedGroups = new String[] {"anyone"};

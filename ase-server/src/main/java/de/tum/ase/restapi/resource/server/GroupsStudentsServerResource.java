@@ -1,11 +1,10 @@
 package de.tum.ase.restapi.resource.server;
 
+import de.tum.ase.restapi.resource.GroupsStudentsResource;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
 import java.util.logging.Level;
-
-import de.tum.ase.restapi.resource.GroupsStudentsResource;
 
 public class GroupsStudentsServerResource extends AbstractServerResource implements GroupsStudentsResource {
 
