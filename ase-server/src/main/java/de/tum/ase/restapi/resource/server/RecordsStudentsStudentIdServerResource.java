@@ -10,34 +10,34 @@ import java.util.logging.Level;
 public class RecordsStudentsStudentIdServerResource extends AbstractServerResource implements RecordsStudentsStudentIdResource {
 
     // Define allowed roles for the method "get".
-    private static final String[] get24AllowedGroups = new String[] {"anyone"};
+    private static final String[] get24AllowedGroups = new String[]{"anyone"};
     // Define denied roles for the method "get".
-    private static final String[] get24DeniedGroups = new String[] {};
+    private static final String[] get24DeniedGroups = new String[]{};
 
-    public de.tum.ase.restapi .representation.AttendanceRecord represent() throws Exception {
-       de.tum.ase.restapi .representation.AttendanceRecord result = null;
+    public de.tum.ase.restapi.representation.AttendanceRecord represent() throws Exception {
+        de.tum.ase.restapi.representation.AttendanceRecord result = null;
         checkGroups(get24AllowedGroups, get24DeniedGroups);
-        
+
 
         try {
-		
-			// Path variables
-			
-	    String studentIdPathVariable = Reference.decode(getAttribute("studentId"));
 
-        // Query parameters
-        
-        	
-	    result = new de.tum.ase.restapi .representation.AttendanceRecord();
-	    
-	    // Initialize here your bean
-         } catch (Exception ex) {
+            // Path variables
+
+            String studentIdPathVariable = Reference.decode(getAttribute("studentId"));
+
+            // Query parameters
+
+
+            result = new de.tum.ase.restapi.representation.AttendanceRecord();
+
+            // Initialize here your bean
+        } catch (Exception ex) {
             // In a real code, customize handling for each type of exception
             getLogger().log(Level.WARNING, "Error when executing the method", ex);
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,
                     ex.getMessage(), ex);
         }
-    
+
         return result;
     }
 

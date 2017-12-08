@@ -1,6 +1,7 @@
 package de.tum.ase.restapi.resource.server;
 
 import com.googlecode.objectify.ObjectifyService;
+import de.tum.ase.restapi.representation.Group;
 import de.tum.ase.restapi.resource.GroupsResource;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
@@ -20,7 +21,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
 
     }
 
-    public de.tum.ase.restapi.representation.Group represent() throws Exception {
+    public Group represent() throws Exception {
         de.tum.ase.restapi.representation.Group result = null;
         checkGroups(get1AllowedGroups, get1DeniedGroups);
 
@@ -28,7 +29,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
         try {
 
             // Query parameters
-
+            ObjectifyService.ofy().load().type(Group.class);
 
             result = new de.tum.ase.restapi.representation.Group();
 
@@ -48,7 +49,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
     // Define denied roles for the method "post".
     private static final String[] post2DeniedGroups = new String[]{};
 
-    public de.tum.ase.restapi.representation.Group add(de.tum.ase.restapi.representation.Group bean) throws Exception {
+    public de.tum.ase.restapi.representation.Group add(Group bean) throws Exception {
         de.tum.ase.restapi.representation.Group result = null;
         checkGroups(post2AllowedGroups, post2DeniedGroups);
 
@@ -73,7 +74,6 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
 //                    .list();
 
             result = new de.tum.ase.restapi.representation.Group();
-            result.setId("my Gourpd");
             ObjectifyService.ofy().save().entity(result).now();
 
 

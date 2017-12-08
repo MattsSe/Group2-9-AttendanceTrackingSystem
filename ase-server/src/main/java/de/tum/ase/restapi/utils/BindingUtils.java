@@ -9,9 +9,8 @@ public class BindingUtils {
     /**
      * Throws an {@link IllegalArgumentException} if no Integer can be parsed
      * from the variable's value.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static void checkInteger(String value) {
         toInteger(value);
@@ -20,9 +19,8 @@ public class BindingUtils {
     /**
      * Returns the Integer parsed from the variable's value. Throws an
      * {@link IllegalArgumentException} if no Integer can be parsed.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static Integer toInteger(String value) {
         if (StringUtils.isNullOrEmpty(value)) {
@@ -39,9 +37,8 @@ public class BindingUtils {
     /**
      * Throws an {@link IllegalArgumentException} if no Long can be parsed from
      * the variable's value.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static void checkLong(String value) {
         toLong(value);
@@ -50,9 +47,8 @@ public class BindingUtils {
     /**
      * Returns the Long parsed from the variable's value. Throws an
      * {@link IllegalArgumentException} if no Long can be parsed.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static Long toLong(String value) {
         if (StringUtils.isNullOrEmpty(value)) {
@@ -69,9 +65,8 @@ public class BindingUtils {
     /**
      * Throws an {@link IllegalArgumentException} if no Date can be parsed from
      * the variable's value.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static void checkDate(String value) {
         toDate(value);
@@ -80,9 +75,8 @@ public class BindingUtils {
     /**
      * Returns the Date parsed from the variable's value. Throws an
      * {@link IllegalArgumentException} if no Date can be parsed.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static Date toDate(String value) {
         if (StringUtils.isNullOrEmpty(value)) {
@@ -99,9 +93,8 @@ public class BindingUtils {
     /**
      * Throws an {@link IllegalArgumentException} if no Double can be parsed
      * from the variable's value.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static void checkDouble(String value) {
         toDouble(value);
@@ -110,9 +103,8 @@ public class BindingUtils {
     /**
      * Returns the Double parsed from the variable's value. Throws an
      * {@link IllegalArgumentException} if no Double can be parsed.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static Double toDouble(String value) {
         if (StringUtils.isNullOrEmpty(value)) {
@@ -129,9 +121,8 @@ public class BindingUtils {
     /**
      * Throws an {@link IllegalArgumentException} if no Float can be parsed from
      * the variable's value.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static void checkFloat(String value) {
         toFloat(value);
@@ -140,9 +131,8 @@ public class BindingUtils {
     /**
      * Returns the Float parsed from the variable's value. Throws an
      * {@link IllegalArgumentException} if no Float can be parsed.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static Float toFloat(String value) {
         if (StringUtils.isNullOrEmpty(value)) {
@@ -159,9 +149,8 @@ public class BindingUtils {
     /**
      * Throws an {@link IllegalArgumentException} if no Boolean can be parsed
      * from the variable's value.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static void checkBoolean(String value) {
         toBoolean(value);
@@ -171,9 +160,8 @@ public class BindingUtils {
      * Returns the Boolean parsed from the variable's value. Throws an
      * {@link IllegalArgumentException} if no Boolean can be parsed from the
      * variable's value.
-     * 
-     * @param value
-     *            The variable's value.
+     *
+     * @param value The variable's value.
      */
     public static Boolean toBoolean(String value) {
         if (StringUtils.isNullOrEmpty(value)) {

@@ -5,10 +5,13 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class QrCode {
-    /** Default serial version ID. */
+    /**
+     * Default serial version ID.
+     */
     private static final long serialVersionUID = 1L;
 
-    @Id String id;
+    @Id
+    String id;
 
     public String getId() {
         return id;

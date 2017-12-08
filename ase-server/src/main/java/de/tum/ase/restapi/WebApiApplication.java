@@ -73,17 +73,17 @@ public class WebApiApplication extends Application {
     private int versionMicro;
 
     private int versionMinor;
-    
+
     public WebApiApplication() {
         securityDao = new SecurityDao();
-    	setName("aseAttendanceApi");
+        setName("aseAttendanceApi");
         CorsService corsService = new CorsService();
         corsService.setAllowedCredentials(true);
         corsService.setSkippingResourceForCorsOptions(true);
         getServices().add(corsService);
     }
 
-	private ChallengeAuthenticator createApiGuard(Restlet next) {
+    private ChallengeAuthenticator createApiGuard(Restlet next) {
 
         ChallengeAuthenticator apiGuard = new ChallengeAuthenticator(
                 getContext(), ChallengeScheme.HTTP_BASIC, "realm");
@@ -130,22 +130,22 @@ public class WebApiApplication extends Application {
 
     public Router createApiRouter() {
         Router apiRouter = new Router(getContext());
-        apiRouter.attach(ROUTE_GROUPS.substring(0, ROUTE_GROUPS.length()-1), GroupsServerResource.class);
+        apiRouter.attach(ROUTE_GROUPS.substring(0, ROUTE_GROUPS.length() - 1), GroupsServerResource.class);
         apiRouter.attach(ROUTE_GROUPS, GroupsServerResource.class);
         apiRouter.attach(ROUTE_GROUPSGROUPID, GroupsGroupidServerResource.class);
         apiRouter.attach(ROUTE_GROUPSGROUPIDSTUDENTS, GroupsGroupidStudentsServerResource.class);
         apiRouter.attach(ROUTE_GROUPSGROUPIDSTUDENTSSTUDENTID, GroupsGroupidStudentsStudentidServerResource.class);
         apiRouter.attach(ROUTE_FINDSGROUPSBYSTUDENT, FindsGroupsbyStudentServerResource.class);
         apiRouter.attach(ROUTE_GROUPSSTUDENTS, GroupsStudentsServerResource.class);
-        apiRouter.attach(ROUTE_STUDENT.substring(0, ROUTE_STUDENT.length()-1), StudentServerResource.class);
+        apiRouter.attach(ROUTE_STUDENT.substring(0, ROUTE_STUDENT.length() - 1), StudentServerResource.class);
         apiRouter.attach(ROUTE_STUDENT, StudentServerResource.class);
         apiRouter.attach(ROUTE_STUDENTAUTH, StudentAuthServerResource.class);
         apiRouter.attach(ROUTE_STUDENTLOGOUT, StudentLogoutServerResource.class);
         apiRouter.attach(ROUTE_STUDENTSTUDENTIDQR, StudentStudentidQrServerResource.class);
         apiRouter.attach(ROUTE_STUDENTREGISTER, StudentRegisterServerResource.class);
-        apiRouter.attach(ROUTE_RECORDS.substring(0, ROUTE_RECORDS.length()-1), RecordsServerResource.class);
+        apiRouter.attach(ROUTE_RECORDS.substring(0, ROUTE_RECORDS.length() - 1), RecordsServerResource.class);
         apiRouter.attach(ROUTE_RECORDS, RecordsServerResource.class);
-        apiRouter.attach(ROUTE_RECORDSATTENDANCEID.substring(0, ROUTE_RECORDSATTENDANCEID.length()-1), RecordsAttendanceidServerResource.class);
+        apiRouter.attach(ROUTE_RECORDSATTENDANCEID.substring(0, ROUTE_RECORDSATTENDANCEID.length() - 1), RecordsAttendanceidServerResource.class);
         apiRouter.attach(ROUTE_RECORDSATTENDANCEID, RecordsAttendanceidServerResource.class);
         apiRouter.attach(ROUTE_RECORDSGROUPSGROUPID, RecordsGroupsGroupIdServerResource.class);
         apiRouter.attach(ROUTE_RECORDSSTUDENTSSTUDENTID, RecordsStudentsStudentIdServerResource.class);

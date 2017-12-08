@@ -4,27 +4,31 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Group {
-    /** Default serial version ID. */
+    /**
+     * Default serial version ID.
+     */
     private static final long serialVersionUID = 1L;
 
-    @Id private String id;
+    @Id
+    private Long id;
 
-    
-    public String getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
 
     private String maxSlots;
 
-    
+
     public String getMaxSlots() {
         return maxSlots;
     }
@@ -34,18 +38,17 @@ public class Group {
     }
 
 
-    private java.util.List<String> students;
+    private List<Long> students;
 
-    
-    
-    public java.util.List<String> getStudents() {
+
+    public List<Long> getStudents() {
         if (students == null) {
-            students = new ArrayList<String>();
+            students = new ArrayList<>();
         }
         return students;
     }
 
-    public void setStudents(java.util.List<String> students) {
+    public void setStudents(List<Long> students) {
         this.students = students;
     }
 

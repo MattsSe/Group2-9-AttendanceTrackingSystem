@@ -5,12 +5,15 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class AttendanceRecord {
-    /** Default serial version ID. */
+    /**
+     * Default serial version ID.
+     */
     private static final long serialVersionUID = 1L;
 
-    @Id private String attendance_id;
+    @Id
+    private String attendance_id;
 
-    
+
     public String getAttendance_id() {
         return attendance_id;
     }
@@ -22,7 +25,7 @@ public class AttendanceRecord {
 
     private String student_id;
 
-    
+
     public String getStudent_id() {
         return student_id;
     }
@@ -34,7 +37,7 @@ public class AttendanceRecord {
 
     private String tutorial_group_id;
 
-    
+
     public String getTutorial_group_id() {
         return tutorial_group_id;
     }
@@ -46,7 +49,7 @@ public class AttendanceRecord {
 
     private String week_id;
 
-    
+
     public String getWeek_id() {
         return week_id;
     }
@@ -58,7 +61,7 @@ public class AttendanceRecord {
 
     private String presented;
 
-    
+
     public String getPresented() {
         return presented;
     }
