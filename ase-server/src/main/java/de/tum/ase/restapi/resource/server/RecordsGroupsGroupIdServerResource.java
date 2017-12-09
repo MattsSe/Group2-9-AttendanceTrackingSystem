@@ -6,6 +6,7 @@ import org.restlet.data.Reference;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
+import java.util.List;
 import java.util.logging.Level;
 
 public class RecordsGroupsGroupIdServerResource extends AbstractServerResource implements RecordsGroupsGroupIdResource {
@@ -15,8 +16,8 @@ public class RecordsGroupsGroupIdServerResource extends AbstractServerResource i
     // Define denied roles for the method "get".
     private static final String[] get23DeniedGroups = new String[]{};
 
-    public de.tum.ase.restapi.representation.AttendanceRecord represent() throws Exception {
-        AttendanceRecord result = null;
+    public List<AttendanceRecord> represent() throws Exception {
+        List<AttendanceRecord> result = null;
         checkGroups(get23AllowedGroups, get23DeniedGroups);
 
 
@@ -27,9 +28,6 @@ public class RecordsGroupsGroupIdServerResource extends AbstractServerResource i
             String groupIdPathVariable = Reference.decode(getAttribute("groupId"));
 
             // Query parameters
-
-
-            result = new de.tum.ase.restapi.representation.AttendanceRecord();
 
             // Initialize here your bean
         } catch (Exception ex) {

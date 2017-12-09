@@ -26,14 +26,14 @@ public class Group {
     }
 
 
-    private String maxSlots;
+    private Integer maxSlots;
 
 
-    public String getMaxSlots() {
+    public Integer getMaxSlots() {
         return maxSlots;
     }
 
-    public void setMaxSlots(String maxSlots) {
+    public void setMaxSlots(Integer maxSlots) {
         this.maxSlots = maxSlots;
     }
 
@@ -50,6 +50,17 @@ public class Group {
 
     public void setStudents(List<Long> students) {
         this.students = students;
+    }
+
+    public boolean isFull() {
+        if (getStudents() == null || getMaxSlots() == null) {
+            return false;
+        }
+        return getStudents().size() == getMaxSlots();
+    }
+
+    public boolean hasFreeSlots() {
+        return !isFull();
     }
 
 }

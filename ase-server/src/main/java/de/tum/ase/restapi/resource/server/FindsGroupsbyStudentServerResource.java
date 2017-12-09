@@ -1,9 +1,11 @@
 package de.tum.ase.restapi.resource.server;
 
+import de.tum.ase.restapi.representation.Group;
 import de.tum.ase.restapi.resource.FindsGroupsbyStudentResource;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
+import java.util.List;
 import java.util.logging.Level;
 
 public class FindsGroupsbyStudentServerResource extends AbstractServerResource implements FindsGroupsbyStudentResource {
@@ -13,17 +15,14 @@ public class FindsGroupsbyStudentServerResource extends AbstractServerResource i
     // Define denied roles for the method "get".
     private static final String[] get11DeniedGroups = new String[]{};
 
-    public de.tum.ase.restapi.representation.Group represent() throws Exception {
-        de.tum.ase.restapi.representation.Group result = null;
+    public List<Group> represent() throws Exception {
+        List<Group> result = null;
         checkGroups(get11AllowedGroups, get11DeniedGroups);
 
 
         try {
 
             // Query parameters
-
-
-            result = new de.tum.ase.restapi.representation.Group();
 
             // Initialize here your bean
         } catch (Exception ex) {

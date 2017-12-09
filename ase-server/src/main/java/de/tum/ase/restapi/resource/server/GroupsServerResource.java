@@ -1,15 +1,16 @@
 package de.tum.ase.restapi.resource.server;
 
-import com.google.common.collect.Lists;
 import com.googlecode.objectify.ObjectifyService;
 import de.tum.ase.restapi.representation.Group;
 import de.tum.ase.restapi.resource.GroupsResource;
-import static de.tum.ase.restapi.utils.QueryParameterUtils.*;
+import de.tum.ase.restapi.utils.QueryParameterUtils;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
 import java.util.List;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GroupsServerResource extends AbstractServerResource implements GroupsResource {
 
@@ -25,7 +26,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
     }
 
     public List<Group> represent() throws Exception {
-        de.tum.ase.restapi.representation.Group result = null;
+        List<Group> result;
         checkGroups(get1AllowedGroups, get1DeniedGroups);
 
         try {
@@ -35,15 +36,18 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
             String sort = getQueryValue("$sort");
             String free = getQueryValue("free");
 
-            // TODO validate options -> then fetch accordingly
-
-
             // Query parameters
-            ObjectifyService.ofy().load().type(Group.class);
+            List<Group> groups = ObjectifyService.ofy().load().type(Group.class).list();
+            Stream<Group> groupStream = groups.stream();
+            int length = (size != null) ? toInteger(size) : groups.size();
+            if (free != null) {
+                groupStream = groups.stream().filter(Group::hasFreeSlots);
+            }
+            if (sort != null) {
+                groupStream = groupStream.sorted(QueryParameterUtils.createComparator(sort));
+            }
+            result = groupStream.limit(length).collect(Collectors.toList());
 
-            result = new de.tum.ase.restapi.representation.Group();
-
-            // Initialize here your bean
         } catch (Exception ex) {
             // In a real code, customize handling for each type of exception
             getLogger().log(Level.WARNING, "Error when executing the method", ex);
@@ -51,7 +55,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
                     ex.getMessage(), ex);
         }
 
-        return Lists.newArrayList(result);
+        return result;
     }
 
     // Define allowed roles for the method "post".
