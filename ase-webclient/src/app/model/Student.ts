@@ -10,27 +10,28 @@
  * Do not edit the class manually.
  */
 
-import * as models from './index';
-
 export interface Student {
-    /**
-     * The first name of the student
-     */
-    firstName?: string;
+  /**
+   * The first name of the student
+   */
+  firstName?: string;
 
-    /**
-     * The last name of the student
-     */
-    lastName?: string;
+  /**
+   * The last name of the student
+   */
+  lastName?: string;
 
-    /**
-     * The user's email account
-     */
-    email?: string;
+  /**
+   * The user's email account
+   */
+  email?: string;
 
-    /**
-     * The Id of the user
-     */
-    id?: string;
+  /**
+   * The Id of the user
+   */
+  id?: number;
+
+
+  password?: string;
 
 }

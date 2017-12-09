@@ -78,6 +78,7 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
 import { GroupsComponent } from './groups/groups.component';
 import { AttendanceLogsComponent } from './attendance-logs/attendance-logs.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import {GroupsService} from "./services/groups.service";
 
 @NgModule({
   imports: [
@@ -110,7 +111,8 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     AlertService,
     AuthenticationService,
     StudentService,
-    LoggingService
+    LoggingService,
+    GroupsService
   ],
   bootstrap: [AppComponent]
 })

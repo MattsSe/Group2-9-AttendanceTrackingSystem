@@ -7,6 +7,7 @@ import {LoggingService} from './logging.service';
 import {Student} from '../model/student';
 import {User} from '../model/user';
 import {appConfig} from '../app.config';
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthenticationService {
@@ -38,4 +39,20 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentStudent');
   }
+
+
+  currentStudent(): Student {
+    let student = localStorage.getItem('currentStudent') as Student;
+    if (!environment.production) {
+      student = {
+        id: 6192449487634432,
+        email: 'admin',
+        firstName: 'admin',
+        lastName: 'admin',
+        password: 'admin'
+      };
+    }
+    return student;
+  }
+
 }

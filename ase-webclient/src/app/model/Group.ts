@@ -19,7 +19,7 @@ export interface Group {
     /**
      * Auto-generated primary key field
      */
-    id: string;
+    id: number;
 
     /**
      * the maximum students a group can contain
@@ -29,6 +29,6 @@ export interface Group {
     /**
      * This property is a reference to registered student for this group
      */
-    students?: Array<string>;
+    students?: Array<number>;
 
 }

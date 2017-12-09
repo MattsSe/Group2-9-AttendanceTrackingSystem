@@ -1,3 +1,22 @@
-<p>
-  groups works!
-</p>
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-align-justify"></i> Available Groups
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
+      <tr>
+        <th>Group ID</th>
+        <th>Members</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <tr *ngFor="let group of groups" [ngClass]="{'table-success': isRegistered(group)}">
+        <td>{{group.id}}</td>
+        <td>{{group.students.length || 0}} / {{ group.maxSlots}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
