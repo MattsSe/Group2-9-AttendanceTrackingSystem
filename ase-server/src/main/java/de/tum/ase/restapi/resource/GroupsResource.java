@@ -11,7 +11,7 @@ public interface GroupsResource {
     @Get
     List<Group> represent() throws Exception;
 
-    @Post("json")
+    @Post
     de.tum.ase.restapi.representation.Group add(de.tum.ase.restapi.representation.Group bean) throws Exception;
 
 }

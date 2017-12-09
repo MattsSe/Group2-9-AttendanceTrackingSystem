@@ -1,5 +1,6 @@
 package de.tum.ase.restapi.resource.server;
 
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import de.tum.ase.restapi.representation.Group;
 import de.tum.ase.restapi.resource.GroupsResource;
@@ -18,7 +19,10 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
     private static final String[] get1AllowedGroups = new String[]{"anyone"};
     // Define denied roles for the method "get".
     private static final String[] get1DeniedGroups = new String[]{};
-
+    // Define allowed roles for the method "post".
+    private static final String[] post2AllowedGroups = new String[]{"anyone"};
+    // Define denied roles for the method "post".
+    private static final String[] post2DeniedGroups = new String[]{};
 
     @Override
     protected void doInit() throws ResourceException {
@@ -58,11 +62,6 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
         return result;
     }
 
-    // Define allowed roles for the method "post".
-    private static final String[] post2AllowedGroups = new String[]{"anyone"};
-    // Define denied roles for the method "post".
-    private static final String[] post2DeniedGroups = new String[]{};
-
     public de.tum.ase.restapi.representation.Group add(Group bean) throws Exception {
         de.tum.ase.restapi.representation.Group result = null;
         checkGroups(post2AllowedGroups, post2DeniedGroups);
@@ -73,22 +72,23 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
 
         try {
 
-            // Query parameters
+            if (bean.getId() != null) {
+                // check if a student with the email is already registered
+                boolean exists = ObjectifyService.ofy()
+                        .load()
+                        .type(Group.class).id(bean.getId()).now() != null;
 
-//            Key<Guestbook> theBook = Key.create(Guestbook.class, guestbookName);
-//
-//            // Run an ancestor query to ensure we see the most up-to-date
-//            // view of the Greetings belonging to the selected Guestbook.
-//            List<Greeting> greetings = ObjectifyService.ofy()
-//                    .load()
-//                    .type(Greeting.class) // We want only Greetings
-//                    .ancestor(theBook)    // Anyone in this book
-//                    .order("-date")       // Most recent first - date is indexed.
-//                    .limit(5)             // Only show 5 of them.
-//                    .list();
+                if (exists) {
+                    getLogger().log(Level.WARNING, "A group entry with this id already exists.");
+                    throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
+                }
+            }
 
-            result = new de.tum.ase.restapi.representation.Group();
-            ObjectifyService.ofy().save().entity(result).now();
+            // save the new group
+            Key<Group> groupKey = ObjectifyService.ofy().save().entity(bean).now();
+
+            // return the saved group
+            result = ObjectifyService.ofy().load().key(groupKey).now();
 
 
             // Initialize here your bean

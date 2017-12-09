@@ -14,6 +14,10 @@ public class RecordsServerResource extends AbstractServerResource implements Rec
     private static final String[] get16AllowedGroups = new String[]{"anyone"};
     // Define denied roles for the method "get".
     private static final String[] get16DeniedGroups = new String[]{};
+    // Define allowed roles for the method "post".
+    private static final String[] post17AllowedGroups = new String[]{"anyone"};
+    // Define denied roles for the method "post".
+    private static final String[] post17DeniedGroups = new String[]{};
 
     public List<AttendanceRecord> represent() throws Exception {
         List<AttendanceRecord> result = null;
@@ -23,8 +27,9 @@ public class RecordsServerResource extends AbstractServerResource implements Rec
         try {
 
             // Query parameters
-
-
+            String size = getQueryValue("$size");
+            String week = getQueryValue("$weekId");
+            String sort = getQueryValue("$sort");
 
             // Initialize here your bean
         } catch (Exception ex) {
@@ -37,12 +42,7 @@ public class RecordsServerResource extends AbstractServerResource implements Rec
         return result;
     }
 
-    // Define allowed roles for the method "post".
-    private static final String[] post17AllowedGroups = new String[]{"anyone"};
-    // Define denied roles for the method "post".
-    private static final String[] post17DeniedGroups = new String[]{};
-
-    public void add(de.tum.ase.restapi.representation.AttendanceRecord bean) throws Exception {
+    public void add(AttendanceRecord bean) throws Exception {
         checkGroups(post17AllowedGroups, post17DeniedGroups);
 
         if (bean == null) {

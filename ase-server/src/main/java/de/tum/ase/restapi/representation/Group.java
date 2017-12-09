@@ -63,4 +63,12 @@ public class Group {
         return !isFull();
     }
 
+    public boolean isEmpty() {
+        return  getStudents().isEmpty();
+    }
+
+
+    public boolean isValid() {
+        return getId() != null && getMaxSlots() != null;
+    }
 }

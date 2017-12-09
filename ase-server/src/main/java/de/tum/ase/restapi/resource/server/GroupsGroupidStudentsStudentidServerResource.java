@@ -13,6 +13,14 @@ public class GroupsGroupidStudentsStudentidServerResource extends AbstractServer
     private static final String[] get8AllowedGroups = new String[]{"anyone"};
     // Define denied roles for the method "get".
     private static final String[] get8DeniedGroups = new String[]{};
+    // Define allowed roles for the method "put".
+    private static final String[] put9AllowedGroups = new String[]{"anyone"};
+    // Define denied roles for the method "put".
+    private static final String[] put9DeniedGroups = new String[]{};
+    // Define allowed roles for the method "delete".
+    private static final String[] delete10AllowedGroups = new String[]{"anyone"};
+    // Define denied roles for the method "delete".
+    private static final String[] delete10DeniedGroups = new String[]{};
 
     public de.tum.ase.restapi.representation.Student represent() throws Exception {
         de.tum.ase.restapi.representation.Student result = null;
@@ -42,11 +50,6 @@ public class GroupsGroupidStudentsStudentidServerResource extends AbstractServer
 
         return result;
     }
-
-    // Define allowed roles for the method "put".
-    private static final String[] put9AllowedGroups = new String[]{"anyone"};
-    // Define denied roles for the method "put".
-    private static final String[] put9DeniedGroups = new String[]{};
 
     public de.tum.ase.restapi.representation.Student store(de.tum.ase.restapi.representation.Student bean) throws Exception {
         de.tum.ase.restapi.representation.Student result = null;
@@ -79,11 +82,6 @@ public class GroupsGroupidStudentsStudentidServerResource extends AbstractServer
 
         return result;
     }
-
-    // Define allowed roles for the method "delete".
-    private static final String[] delete10AllowedGroups = new String[]{"anyone"};
-    // Define denied roles for the method "delete".
-    private static final String[] delete10DeniedGroups = new String[]{};
 
     public void remove() throws Exception {
         checkGroups(delete10AllowedGroups, delete10DeniedGroups);

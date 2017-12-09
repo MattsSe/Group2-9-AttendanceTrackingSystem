@@ -15,6 +15,10 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
     private static final String[] post16AllowedGroups = new String[]{"anyone"};
     // Define denied roles for the method "post".
     private static final String[] post16DeniedGroups = new String[]{};
+    // Define allowed roles for the method "put".
+    private static final String[] put17AllowedGroups = new String[]{"anyone"};
+    // Define denied roles for the method "put".
+    private static final String[] put17DeniedGroups = new String[]{};
 
     public de.tum.ase.restapi.representation.Student add(de.tum.ase.restapi.representation.Student bean) throws Exception {
         Student result = null;
@@ -53,11 +57,6 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
 
         return result;
     }
-
-    // Define allowed roles for the method "put".
-    private static final String[] put17AllowedGroups = new String[]{"anyone"};
-    // Define denied roles for the method "put".
-    private static final String[] put17DeniedGroups = new String[]{};
 
     public de.tum.ase.restapi.representation.Student store(de.tum.ase.restapi.representation.Student bean) throws Exception {
         de.tum.ase.restapi.representation.Student result = null;
