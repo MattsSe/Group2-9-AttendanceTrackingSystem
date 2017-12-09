@@ -1,11 +1,14 @@
 package de.tum.ase.restapi.resource.server;
 
+import com.google.common.collect.Lists;
 import com.googlecode.objectify.ObjectifyService;
 import de.tum.ase.restapi.representation.Group;
 import de.tum.ase.restapi.resource.GroupsResource;
+import static de.tum.ase.restapi.utils.QueryParameterUtils.*;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
+import java.util.List;
 import java.util.logging.Level;
 
 public class GroupsServerResource extends AbstractServerResource implements GroupsResource {
@@ -21,12 +24,19 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
 
     }
 
-    public Group represent() throws Exception {
+    public List<Group> represent() throws Exception {
         de.tum.ase.restapi.representation.Group result = null;
         checkGroups(get1AllowedGroups, get1DeniedGroups);
 
-
         try {
+            // getQueryValue retuns null if no query parameter present
+            String size = getQueryValue("$size");
+            String page = getQueryValue("$page");
+            String sort = getQueryValue("$sort");
+            String free = getQueryValue("free");
+
+            // TODO validate options -> then fetch accordingly
+
 
             // Query parameters
             ObjectifyService.ofy().load().type(Group.class);
@@ -41,7 +51,7 @@ public class GroupsServerResource extends AbstractServerResource implements Grou
                     ex.getMessage(), ex);
         }
 
-        return result;
+        return Lists.newArrayList(result);
     }
 
     // Define allowed roles for the method "post".

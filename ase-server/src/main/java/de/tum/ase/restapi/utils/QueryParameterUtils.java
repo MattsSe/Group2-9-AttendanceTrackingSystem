@@ -3,9 +3,47 @@ package de.tum.ase.restapi.utils;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Optional;
 
 public class QueryParameterUtils {
+
+
+    public static <T, S extends Comparable> Comparator<T> createComparator(String sortQueryValue) {
+        if (sortQueryValue == null) {
+            throw new IllegalArgumentException("The sortQueryValue must not be null.");
+        }
+        String[] vals = sortQueryValue.trim().toLowerCase().split(" |\\+");
+        if (vals.length != 2) {
+            throw new IllegalArgumentException("The sortQueryValue must consist of filed name and sorting order.");
+        }
+
+        boolean asc = vals[1].equals("asc");
+
+        Comparator<T> c = (o1, o2) -> {
+            Field[] f = o1.getClass()
+                    .getDeclaredFields();
+            Optional<Method> optionalMethod = Arrays.stream(o1.getClass()
+                    .getMethods()).filter(p -> p.getName().equalsIgnoreCase("get" + vals[0])).findFirst();
+
+            if (optionalMethod.isPresent()) {
+                Method method = optionalMethod.get();
+                try {
+                    S v1 = (S) method.invoke(o1);
+                    S v2 = (S) method.invoke(o2);
+                    return asc ?  v1.compareTo(v2) : v2.compareTo(v1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return 0;
+        };
+        return c;
+    }
 
     /**
      * Throws an {@link IllegalArgumentException} if no Integer can be parsed
