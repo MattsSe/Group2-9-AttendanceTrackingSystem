@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "serve:dev": "ng serve --host 0.0.0.0 --port 4200 --proxy-config proxy.conf.json --environment=dev",
-    "build:deploy": "ng build --output-path ../ase-server/src/main/webapp/dist --deploy-url dist"
+    "build:deploy": "ng build --output-path ../ase-server/src/main/webapp/dist --deploy-url dist/"
   },
   "private": true,
   "dependencies": {

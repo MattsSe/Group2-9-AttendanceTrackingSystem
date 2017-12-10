@@ -1,32 +1,31 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {LoggingService} from './logging.service';
-import {Student} from '../model/student';
-import {User} from '../model/user';
 import {appConfig} from '../app.config';
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
+import {Student, User, UserData} from '../model';
 
 @Injectable()
 export class AuthenticationService {
 
-  private loginPath = appConfig.apiUrl + 'student/login';
+  private loginPath = appConfig.apiUrl + 'student/auth';
 
   constructor(private http: HttpClient, private log: LoggingService) {
   }
 
   async login(username: string, password: string) {
     // authenticate
-    const headers = new HttpHeaders();
-    headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    headers = headers.append('Content-Type', 'application/json');
 
-    const response = await this.http.post(this.loginPath, null, {headers: headers}).toPromise();
+    const response = await this.http.post(this.loginPath, '', {headers: headers}).toPromise();
     try {
       const student = response as Student;
       if (student) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('currentAuth', JSON.stringify({username: username, password: password}));
         localStorage.setItem('currentStudent', JSON.stringify(student));
       }
     } catch (err) {
@@ -40,6 +39,30 @@ export class AuthenticationService {
     localStorage.removeItem('currentStudent');
   }
 
+  currentAuth(): UserData {
+    const student = localStorage.getItem('currentStudent') as Student;
+    const auth = localStorage.getItem('currentStudent') as User;
+
+    if (student && auth) {
+      return {
+        email: student.email,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        id: student.id,
+        password: auth.password
+      };
+    }
+    if (!environment.production) {
+      return {
+        id: 6192449487634432,
+        email: 'admin',
+        firstName: 'admin',
+        lastName: 'admin',
+        password: 'admin'
+      };
+    }
+    return null;
+  }
 
   currentStudent(): Student {
     let student = localStorage.getItem('currentStudent') as Student;
@@ -49,7 +72,6 @@ export class AuthenticationService {
         email: 'admin',
         firstName: 'admin',
         lastName: 'admin',
-        password: 'admin'
       };
     }
     return student;

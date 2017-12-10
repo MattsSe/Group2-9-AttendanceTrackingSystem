@@ -9,7 +9,6 @@ import {Group} from '../model';
 export class GroupsService {
 
   basePath = appConfig.apiUrl;
-  defaultHeaders: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient, private log: LoggingService) {
   }

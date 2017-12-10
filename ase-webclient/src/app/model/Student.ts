@@ -31,7 +31,4 @@ export interface Student {
    */
   id?: number;
 
-
-  password?: string;
-
 }
