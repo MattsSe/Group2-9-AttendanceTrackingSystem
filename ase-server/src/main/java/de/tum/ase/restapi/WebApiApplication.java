@@ -48,6 +48,9 @@ public class WebApiApplication extends Application {
 
     public static final String ROUTE_RECORDSSTUDENTSSTUDENTID = "/records/students/{studentId}";
 
+    public static final String ROUTE_RECORDSQRSTUDENTID = "/records/qr/{studentId}/";
+
+
 
     /*
      * Define role names
@@ -151,7 +154,8 @@ public class WebApiApplication extends Application {
         apiRouter.attach(ROUTE_RECORDSATTENDANCEID, RecordsAttendanceidServerResource.class);
         apiRouter.attach(ROUTE_RECORDSGROUPSGROUPID, RecordsGroupsGroupIdServerResource.class);
         apiRouter.attach(ROUTE_RECORDSSTUDENTSSTUDENTID, RecordsStudentsStudentIdServerResource.class);
-
+        apiRouter.attach(ROUTE_RECORDSQRSTUDENTID.substring(0, ROUTE_RECORDSQRSTUDENTID.length()-1), RecordsQrStudentIdServerResource.class);
+        apiRouter.attach(ROUTE_RECORDSQRSTUDENTID, RecordsQrStudentIdServerResource.class);
         return apiRouter;
     }
 
