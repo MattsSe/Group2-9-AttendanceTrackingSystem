@@ -23,6 +23,7 @@ public class OfyHelper  implements ServletContextListener {
         ObjectifyService.register(Group.class);
         ObjectifyService.register(QrCode.class);
         ObjectifyService.register(Student.class);
+        ObjectifyService.register(Secret.class);
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
     }
 

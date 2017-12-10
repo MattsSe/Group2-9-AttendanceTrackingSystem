@@ -1,5 +1,6 @@
 package de.tum.ase.restapi.representation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -36,7 +37,8 @@ public class Student {
     }
 
 
-    @Index private String email;
+    @Index
+    private String email;
 
 
     public String getEmail() {
@@ -60,17 +62,7 @@ public class Student {
         this.id = id;
     }
 
-    private String password;
-
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    @JsonIgnore
     public boolean isComplete() {
         if (!isValid()) {
             return false;
@@ -78,13 +70,11 @@ public class Student {
         if (!hasId()) {
             return false;
         }
-        if (getPassword() == null || getPassword().isEmpty()) {
-            return false;
-        }
 
         return true;
     }
 
+    @JsonIgnore
     public boolean hasId() {
         if (getId() == null || getId() == 0) {
             return false;
@@ -92,6 +82,7 @@ public class Student {
         return true;
     }
 
+    @JsonIgnore
     public boolean isValid() {
         if (getFirstName() == null || getFirstName().isEmpty()) {
             return false;

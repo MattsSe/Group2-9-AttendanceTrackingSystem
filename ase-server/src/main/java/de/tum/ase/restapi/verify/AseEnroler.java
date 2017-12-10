@@ -6,7 +6,9 @@ import org.restlet.security.Enroler;
 public class AseEnroler implements Enroler {
     @Override
     public void enrole(ClientInfo clientInfo) {
-//        User user = findUser(clientInfo.getUser().getIdentifier());
+//https://stackoverflow.com/questions/30028907/restlet-authorization-by-method-and-user
+
+//        UserAccount user = findUser(clientInfo.getUser().getIdentifier());
 //
 //        if (user != null) {
 //            // Find all the inherited groups of this user

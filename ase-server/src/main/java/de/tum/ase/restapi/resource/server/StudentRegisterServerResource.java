@@ -2,7 +2,9 @@ package de.tum.ase.restapi.resource.server;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
+import de.tum.ase.restapi.representation.Secret;
 import de.tum.ase.restapi.representation.Student;
+import de.tum.ase.restapi.representation.UserData;
 import de.tum.ase.restapi.resource.StudentRegisterResource;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
@@ -20,8 +22,8 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
     // Define denied roles for the method "put".
     private static final String[] put17DeniedGroups = new String[]{};
 
-    public de.tum.ase.restapi.representation.Student add(de.tum.ase.restapi.representation.Student bean) throws Exception {
-        Student result = null;
+    public Student add(UserData bean) throws Exception {
+        Student result;
         checkGroups(post16AllowedGroups, post16DeniedGroups);
 
         if (bean == null || !bean.isValid()) {
@@ -41,11 +43,16 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
                 throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
             }
 
+            Student student = bean.toStudent();
             // save the new student
-            Key<Student> studentKey = ObjectifyService.ofy().save().entity(bean).now();
-
+            Key<Student> studentKey = ObjectifyService.ofy().save().entity(student).now();
             // return the saved student
             result = ObjectifyService.ofy().load().key(studentKey).now();
+
+            Secret secret = new Secret(result.getId(), bean.getPassword());
+
+            ObjectifyService.ofy().save().entity(secret);
+
 
             // Initialize here your bean
         } catch (Exception ex) {
@@ -58,8 +65,8 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
         return result;
     }
 
-    public de.tum.ase.restapi.representation.Student store(de.tum.ase.restapi.representation.Student bean) throws Exception {
-        de.tum.ase.restapi.representation.Student result = null;
+    public Student store(UserData bean) throws Exception {
+        Student result = null;
         checkGroups(put17AllowedGroups, put17DeniedGroups);
 
         if (bean == null || !bean.isValid()) {
@@ -68,10 +75,15 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
 
         try {
 
+            Student student = bean.toStudent();
             // update the student
-            ObjectifyService.ofy().save().entity(bean);
+            Key<Student> studentKey = ObjectifyService.ofy().save().entity(student).now();
+            // return the saved student
+            result = ObjectifyService.ofy().load().key(studentKey).now();
 
-            result = bean;
+            Secret secret = new Secret(result.getId(), bean.getPassword());
+
+            ObjectifyService.ofy().save().entity(secret);
 
             // Initialize here your bean
         } catch (Exception ex) {

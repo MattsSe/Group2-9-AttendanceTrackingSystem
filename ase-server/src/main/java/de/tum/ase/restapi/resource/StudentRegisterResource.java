@@ -1,15 +1,17 @@
 package de.tum.ase.restapi.resource;
 
+import de.tum.ase.restapi.representation.Student;
+import de.tum.ase.restapi.representation.UserData;
 import org.restlet.resource.Post;
 import org.restlet.resource.Put;
 
 public interface StudentRegisterResource {
 
     @Post
-    de.tum.ase.restapi.representation.Student add(de.tum.ase.restapi.representation.Student bean) throws Exception;
+    Student add(UserData bean) throws Exception;
 
     @Put
-    de.tum.ase.restapi.representation.Student store(de.tum.ase.restapi.representation.Student bean) throws Exception;
+    Student store(UserData bean) throws Exception;
 
 }
 
