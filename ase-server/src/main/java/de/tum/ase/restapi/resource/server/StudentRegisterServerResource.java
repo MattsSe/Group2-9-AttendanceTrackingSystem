@@ -49,7 +49,7 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
             // return the saved student
             result = ObjectifyService.ofy().load().key(studentKey).now();
 
-            Secret secret = new Secret(result.getId(), bean.getPassword());
+            Secret secret = Secret.create(result.getId(), bean.getPassword());
 
             ObjectifyService.ofy().save().entity(secret);
 
@@ -81,7 +81,7 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
             // return the saved student
             result = ObjectifyService.ofy().load().key(studentKey).now();
 
-            Secret secret = new Secret(result.getId(), bean.getPassword());
+            Secret secret = Secret.create(result.getId(), bean.getPassword());
 
             ObjectifyService.ofy().save().entity(secret);
 

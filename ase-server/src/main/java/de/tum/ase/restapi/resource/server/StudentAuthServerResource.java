@@ -1,11 +1,11 @@
 package de.tum.ase.restapi.resource.server;
 
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.cmd.LoadType;
 import de.tum.ase.restapi.representation.Student;
 import de.tum.ase.restapi.resource.StudentAuthResource;
+import org.restlet.Request;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
+import org.restlet.security.User;
 
 import java.util.logging.Level;
 
@@ -16,21 +16,14 @@ public class StudentAuthServerResource extends AbstractServerResource implements
     // Define denied roles for the method "post".
     private static final String[] post13DeniedGroups = new String[]{};
 
-    public Student add(Student bean) throws Exception {
+    public Student add() throws Exception {
+        Student result;
         checkGroups(post13AllowedGroups, post13DeniedGroups);
 
 
         try {
-            LoadType<Student> loader = ObjectifyService.ofy().load().type(Student.class);
-
-            if (bean.hasId()) {
-                return loader.id(bean.getId()).now();
-            }
-            String email = bean.getEmail();
-            if (email == null && !email.isEmpty()) {
-                return loader.filter("email", email).first().now();
-            }
-            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
+            User user = Request.getCurrent().getClientInfo().getUser();
+            result = Student.fromUser(user);
 
         } catch (Exception ex) {
             // In a real code, customize handling for each type of exception
@@ -38,6 +31,8 @@ public class StudentAuthServerResource extends AbstractServerResource implements
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,
                     ex.getMessage(), ex);
         }
+
+        return result;
     }
 
 

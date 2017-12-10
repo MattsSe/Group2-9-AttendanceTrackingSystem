@@ -4,9 +4,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import de.tum.ase.restapi.utils.BindingUtils;
+import org.restlet.security.User;
 
 @Entity
 public class Student {
+
+
+    public static Student fromUser(User user) {
+        Student s = new Student();
+        s.setEmail(user.getEmail());
+        s.setFirstName(user.getFirstName());
+        s.setLastName(user.getLastName());
+        s.setId(Long.valueOf(user.getIdentifier()));
+
+        return s;
+    }
+
+    @JsonIgnore
+    public  User toUser(){
+        User user = new User();
+        user.setEmail(getEmail());
+        user.setFirstName(getFirstName());
+        user.setLastName(getLastName());
+        user.setIdentifier(String.valueOf(getId()));
+
+        return user;
+    }
 
     /**
      * Default serial version ID.

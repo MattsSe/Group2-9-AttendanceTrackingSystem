@@ -13,6 +13,18 @@ public class SecurityDao {
     public SecurityDao() {
     }
 
+    public User loadUser(String identifier) {
+
+        Student student = ObjectifyService.ofy()
+                .load()
+                .type(Student.class)
+                .filter("email", identifier)
+                .first()
+                .now();
+
+        return student.toUser();
+    }
+
     public boolean hasUserPassword(String user, String password) {
 
         Loader loader = ObjectifyService.ofy()
@@ -32,10 +44,11 @@ public class SecurityDao {
                 .type(Secret.class).id(student.getId()).now();
         boolean valid = secret.getPassword().equals(password);
 
-        User appuser = new User(student.getEmail(), secret.getPassword());
+        User appUser = student.toUser();
+        appUser.setSecret(secret.getPassword().toCharArray());
 
         if (valid) {
-            Request.getCurrent().getClientInfo().setUser(appuser);
+            Request.getCurrent().getClientInfo().setUser(appUser);
         }
         return valid;
     }

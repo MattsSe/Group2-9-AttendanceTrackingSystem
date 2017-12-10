@@ -8,9 +8,11 @@ public class Secret {
 
     private static final long serialVersionUID = 1L;
 
-    public Secret(Long studentId, String password) {
-        this.studentId = studentId;
-        this.password = password;
+    public static  Secret create(Long studentId, String password) {
+        Secret secret = new Secret();
+        secret.setStudentId(studentId);
+        secret.setPassword(password);
+        return secret;
     }
 
     @Id

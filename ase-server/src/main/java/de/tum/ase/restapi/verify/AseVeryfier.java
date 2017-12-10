@@ -1,6 +1,9 @@
 package de.tum.ase.restapi.verify;
 
+import org.restlet.Request;
+import org.restlet.Response;
 import org.restlet.security.SecretVerifier;
+import org.restlet.security.User;
 
 public class AseVeryfier extends SecretVerifier {
 
@@ -11,9 +14,12 @@ public class AseVeryfier extends SecretVerifier {
     }
 
     @Override
+    protected User createUser(String identifier, Request request, Response response) {
+        return this.securityDao.loadUser(identifier);
+    }
+
+    @Override
     public int verify(String identifier, char[] secret) {
-        System.out.println(identifier);
-        System.out.println(secret);
         if (securityDao.hasUserPassword(identifier, new String(secret)))
             return RESULT_VALID;
         else

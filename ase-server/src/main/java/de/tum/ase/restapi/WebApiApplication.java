@@ -107,10 +107,10 @@ public class WebApiApplication extends Application {
 
 
         AseVeryfier verifier = new AseVeryfier(this.securityDao);
-
+        apiGuard.setVerifier(verifier);
         // TODO
         // Verifier : to check authentication
-        apiGuard.setVerifier(realm.getVerifier());
+//        apiGuard.setVerifier(realm.getVerifier());
 
         // Enroler : add authorization roles
         apiGuard.setEnroler(realm.getEnroler());
@@ -122,6 +122,8 @@ public class WebApiApplication extends Application {
 
         apiGuard.setNext(next);
 
+
+        // TODO set to false in production
         // In case of anonymous access supported by the API.
         apiGuard.setOptional(true);
 

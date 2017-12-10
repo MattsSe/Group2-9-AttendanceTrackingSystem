@@ -6,7 +6,7 @@ import org.restlet.resource.Post;
 public interface StudentAuthResource {
 
     @Post
-    Student add(Student bean) throws Exception;
+    Student add() throws Exception;
 
 }
 

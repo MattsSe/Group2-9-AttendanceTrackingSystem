@@ -1,5 +1,6 @@
 package de.tum.ase.restapi.representation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -52,6 +53,7 @@ public class Group {
         this.students = students;
     }
 
+    @JsonIgnore
     public boolean isFull() {
         if (getStudents() == null || getMaxSlots() == null) {
             return false;
@@ -59,15 +61,17 @@ public class Group {
         return getStudents().size() == getMaxSlots();
     }
 
+    @JsonIgnore
     public boolean hasFreeSlots() {
         return !isFull();
     }
 
+    @JsonIgnore
     public boolean isEmpty() {
         return  getStudents().isEmpty();
     }
 
-
+    @JsonIgnore
     public boolean isValid() {
         return getId() != null && getMaxSlots() != null;
     }
