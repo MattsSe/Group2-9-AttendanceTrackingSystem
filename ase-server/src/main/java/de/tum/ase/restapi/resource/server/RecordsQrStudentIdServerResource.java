@@ -46,11 +46,11 @@ public class RecordsQrStudentIdServerResource extends AbstractServerResource imp
             }
 
             // TODO add propper qr code content
-            String studentid = Reference.decode(getAttribute("studentId"));
+            String studentId = Reference.decode(getAttribute("studentId"));
 
-            String content =  QrCodeGenerator.createQrCodeStringBase64(studentid, width, height, "png");
+            String content =  QrCodeGenerator.createQrCodeStringBase64(studentId, width, height, "png");
             QrCode qrCode = new QrCode();
-            qrCode.setStudentId(toLong(studentid));
+            qrCode.setStudentId(toLong(studentId));
             qrCode.setContent(content);
             return qrCode;
         } catch (Exception ex) {

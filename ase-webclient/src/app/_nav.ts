@@ -35,7 +35,7 @@ export const navigation = [
   },
   {
     name: 'My Records',
-    url: '/logs/',
+    url: '/logs',
     icon: 'icon-star'
   },
   {

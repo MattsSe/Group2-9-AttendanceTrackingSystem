@@ -43,22 +43,16 @@ export const routes: Routes = [
       },
       {
         // canActivate: [AuthGuard]
-        path: 'logs', component: AttendanceLogsComponent, pathMatch: 'full', data: {
+        path: 'logs', component: AttendanceLogsComponent, data: {
           title: 'Student Logs'
         },
       },
       {
         // canActivate: [AuthGuard]
-        path: 'logs/:userId', component: AttendanceLogsComponent, pathMatch: 'full', data: {
+        path: 'logs/:userId', component: AttendanceLogsComponent, data: {
           title: 'Logs'
         },
-      },
-      {
-        // canActivate: [AuthGuard]
-        path: 'groups', component: GroupsComponent, data: {
-          title: 'Groups'
-        },
-      },
+      }
     ]
 
   },
