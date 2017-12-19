@@ -1,0 +1,55 @@
+/*  First header  */
+h1 {
+  color: grey;
+  margin-bottom : 0;
+  font-family: Arial, sans-serif;
+}
+h3 {
+  color: black;
+  margin-bottom : 1cm;
+  font-family: "Arial", Arial, sans-serif;
+}
+
+label{
+  color: black;
+  margin-top: 1cm;
+  margin-bottom: 0;
+  font-family: "Arial", Arial, sans-serif;
+}
+
+div {
+  color: #0d0d0d;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+/* Style the content */
+.loginContent {
+  padding: 6px 12px 5px 12px;
+  border-top: none;
+  overflow: auto;
+}
+
+input[type=password], input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.button {
+  background-color: #367ebd; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: "Arial", Arial, sans-serif;
+  margin: 4px 2px;
+  cursor: pointer;
+}

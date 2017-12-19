@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Attendance Tracking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Find all further style edits in index.css -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<!-- Title with logo -->
+<span>
+    <h1>Attendance Tracking System</h1>
+</span>
+
+<!-- Define the Login page -->
+<div id="LoginPage" class="loginContent">
+    <h3>Login</h3>
+    <label><b>E-Mail Address</b></label>
+    <input type="text" placeholder="Enter E-Mail" id="inEmail">
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="inPassword">
+
+    <button type="button" class="button" id="btnLogin">Login</button>
+    <div id="userInfo"></div>
+</div>
+
+<!--Define the page where the QR Code is displayed-->
+<div id="QrCodePage" class="QrContent">
+    <h3>Your personalized QR Code</h3>
+    <div id="qrcode"></div>
+</div>
+
+
+<script type="text/javascript" src="js/index.js">
+</script>
+<script>
+    app.initialize()
+</script>
+</body>
+</html>
