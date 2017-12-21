@@ -1,6 +1,7 @@
 package de.tum.ase.restapi.resource.server;
 
 import de.tum.ase.data.QrCodeGenerator;
+import de.tum.ase.data.WeekIdGenerator;
 import de.tum.ase.restapi.representation.QrCode;
 import de.tum.ase.restapi.resource.RecordsQrStudentIdResource;
 import org.restlet.data.Reference;
@@ -18,6 +19,12 @@ public class RecordsQrStudentIdServerResource extends AbstractServerResource imp
 
     public static int DEFAULT_QR_CODE_SIZE = 125;
 
+    /**
+     * @return Create a new qr based on the student id and the current weekid.
+     *  Values are separated by semicolon,
+     *  Format of the qr code content is "{studentid};{weekId}"
+     * @throws Exception
+     */
     public QrCode represent() throws Exception {
         checkGroups(get24AllowedGroups, get24DeniedGroups);
 
@@ -45,10 +52,11 @@ public class RecordsQrStudentIdServerResource extends AbstractServerResource imp
                 height = i;
             }
 
-            // TODO add propper qr code content
             String studentId = Reference.decode(getAttribute("studentId"));
 
-            String content =  QrCodeGenerator.createQrCodeStringBase64(studentId, width, height, "png");
+            String values = String.format("%s;%s", studentId, WeekIdGenerator.generateWeekId());
+
+            String content = QrCodeGenerator.createQrCodeStringBase64(values, width, height, "png");
             QrCode qrCode = new QrCode();
             qrCode.setStudentId(toLong(studentId));
             qrCode.setContent(content);
