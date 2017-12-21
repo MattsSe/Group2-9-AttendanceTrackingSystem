@@ -30,3 +30,6 @@ build
 **/.idea/jsLibraryMappings.xml
 **/webapp/dist/
 *js.map
+/src/main/webapp/*
+!/src/main/webapp/WEB-INF/
+!/src/main/webapp/stylesheets/
