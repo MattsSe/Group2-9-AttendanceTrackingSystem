@@ -70,6 +70,9 @@ public class Student {
     }
 
     public void setEmail(String email) {
+        if( email!=null){
+            email = email.toLowerCase();
+        }
         this.email = email;
     }
 

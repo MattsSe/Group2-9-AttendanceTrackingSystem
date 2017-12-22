@@ -30,8 +30,6 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
         }
         try {
-            // normalize email
-            bean.setEmail(bean.getEmail().toLowerCase());
             // check if a student with the email is already registered
             boolean exists = ObjectifyService.ofy()
                     .load()
@@ -75,7 +73,6 @@ public class StudentRegisterServerResource extends AbstractServerResource implem
         }
 
         try {
-            bean.setEmail(bean.getEmail().toLowerCase());
             Student student = bean.toStudent();
             // update the student
             Key<Student> studentKey = ObjectifyService.ofy().save().entity(student).now();
