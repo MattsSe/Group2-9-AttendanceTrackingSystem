@@ -12,8 +12,8 @@ import {NotAuthorizedComponent} from './not-authorized/not-authorized.component'
 
 export const routes: Routes = [
   // {path: '', component: HomeComponent}, //
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'login', pathMatch: 'full', component: LoginComponent},
+  {path: 'register', pathMatch: 'full', component: RegisterComponent},
   {
     path: '',
     redirectTo: 'dashboard',
