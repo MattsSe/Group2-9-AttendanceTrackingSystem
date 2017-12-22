@@ -18,8 +18,6 @@ export class AuthenticationService {
     // authenticate
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
-    headers = headers.append('Content-Type', 'application/json');
-
     const response = await this.http.post(this.loginPath, '', {headers: headers}).toPromise();
     try {
       const student = response as Student;
@@ -65,8 +63,8 @@ export class AuthenticationService {
   }
 
   currentStudent(): Student {
-    let student = localStorage.getItem('currentStudent') as Student;
-    if (!environment.production) {
+    let student = JSON.parse(localStorage.getItem('currentStudent')) as Student;
+    if (!student && !environment.production) {
       student = {
         id: 6192449487634432,
         email: 'admin',
