@@ -1,48 +1,78 @@
 package de.tum.ase.restapi.representation;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Group {
-    /** Default serial version ID. */
+    /**
+     * Default serial version ID.
+     */
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    @Id
+    private Long id;
 
-    
-    public String getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
 
-    private String maxSlots;
+    private Integer maxSlots;
 
-    
-    public String getMaxSlots() {
+
+    public Integer getMaxSlots() {
         return maxSlots;
     }
 
-    public void setMaxSlots(String maxSlots) {
+    public void setMaxSlots(Integer maxSlots) {
         this.maxSlots = maxSlots;
     }
 
 
-    private java.util.List<String> students;
+    private List<Long> students;
 
-    
-    
-    public java.util.List<String> getStudents() {
+
+    public List<Long> getStudents() {
         if (students == null) {
-            students = new ArrayList<String>();
+            students = new ArrayList<>();
         }
         return students;
     }
 
-    public void setStudents(java.util.List<String> students) {
+    public void setStudents(List<Long> students) {
         this.students = students;
     }
 
+    @JsonIgnore
+    public boolean isFull() {
+        if (getStudents() == null || getMaxSlots() == null) {
+            return false;
+        }
+        return getStudents().size() == getMaxSlots();
+    }
+
+    @JsonIgnore
+    public boolean hasFreeSlots() {
+        return !isFull();
+    }
+
+    @JsonIgnore
+    public boolean isEmpty() {
+        return  getStudents().isEmpty();
+    }
+
+    @JsonIgnore
+    public boolean isValid() {
+        return getId() != null && getMaxSlots() != null;
+    }
 }

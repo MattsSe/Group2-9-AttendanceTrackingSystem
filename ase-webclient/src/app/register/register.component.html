@@ -1,0 +1,83 @@
+<div class="container">
+
+  <div class="row main">
+    <div class="main-header">
+    <div class="panel-heading">
+      <div class="panel-title text-center">
+        <h1 class="title">ASE Attendance Log Web</h1>
+        <hr/>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="row main">
+    <div class="main-login main-center">
+      <form name="form" class="form-horizontal"  (ngSubmit)="f.form.valid && registerAndLogin()" #f="ngForm" novalidate>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
+          <label for="firstName" class="cols-sm-2 control-label">Your First Name</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required placeholder="Enter your First Name" />
+            </div>
+            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
+          <label for="lastName" class="cols-sm-2 control-label">Your Last Name</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" name="lastName" id="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required placeholder="Enter your Last Name"/>
+            </div>
+            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <label for="email" class="cols-sm-2 control-label">Your Email</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" name="email" id="email" [(ngModel)]="model.email" #email="ngModel" required placeholder="Enter your Email"/>
+            </div>
+            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }" >
+          <label for="password" class="cols-sm-2 control-label">Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+              <input type="password" class="form-control" name="password" id="password"  [(ngModel)]="model.password" #password="ngModel" required
+                     placeholder="Enter your Password"/>
+            </div>
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confirm.valid }">
+          <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+              <input type="password" class="form-control" name="confirm" id="confirm" [(ngModel)]="model.confirm" #confirm="ngModel" required
+                     placeholder="Confirm your Password"/>
+            </div>
+            <div *ngIf="!isPasswordConfirmed(f.submitted)" class="help-block">Confirm your password</div>
+          </div>
+        </div>
+
+        <div class="form-group ">
+          <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+        </div>
+        <div class="login-register">
+          <a [routerLink]="['/login']" class="btn btn-link">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

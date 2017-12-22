@@ -1,15 +1,18 @@
 package de.tum.ase.restapi.resource;
 
+import de.tum.ase.restapi.representation.AttendanceRecord;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
+
+import java.util.List;
 
 public interface RecordsResource {
 
     @Get
-    de.tum.ase.restapi.representation.AttendanceRecord represent() throws Exception;
+    List<AttendanceRecord> represent() throws Exception;
 
     @Post
-    void add(de.tum.ase.restapi.representation.AttendanceRecord bean) throws Exception;
+    void add(AttendanceRecord bean) throws Exception;
 
 }
 

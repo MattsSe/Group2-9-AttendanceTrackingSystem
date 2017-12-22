@@ -1,28 +1,30 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {LoggingService} from './logging.service';
-import {Student} from '../models/student';
-import {User} from '../models/user';
+import {appConfig} from '../app.config';
+import {environment} from '../../environments/environment';
+import {Student, User, UserData} from '../model';
 
 @Injectable()
 export class AuthenticationService {
+
+  private loginPath = appConfig.apiUrl + 'student/auth';
+
   constructor(private http: HttpClient, private log: LoggingService) {
   }
 
   async login(username: string, password: string) {
     // authenticate
-    const headers = new HttpHeaders();
-    headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
-
-    const response = await this.http.post('/students/login', {username: username, password: password}).toPromise();
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
+    const response = await this.http.post(this.loginPath, '', {headers: headers}).toPromise();
     try {
-      const user = response as User;
-      if (user) {
+      const student = response as Student;
+      if (student) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentStudent', JSON.stringify(user));
+        localStorage.setItem('currentAuth', JSON.stringify({username: username, password: password}));
+        localStorage.setItem('currentStudent', JSON.stringify(student));
       }
     } catch (err) {
       this.log.log('login failed', err.message);
@@ -34,4 +36,43 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentStudent');
   }
+
+  currentAuth(): UserData {
+    const student = localStorage.getItem('currentStudent') as Student;
+    const auth = localStorage.getItem('currentStudent') as User;
+
+    if (student && auth) {
+      return {
+        email: student.email,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        id: student.id,
+        password: auth.password
+      };
+    }
+    if (!environment.production) {
+      return {
+        id: 6192449487634432,
+        email: 'admin',
+        firstName: 'admin',
+        lastName: 'admin',
+        password: 'admin'
+      };
+    }
+    return null;
+  }
+
+  currentStudent(): Student {
+    let student = JSON.parse(localStorage.getItem('currentStudent')) as Student;
+    if (!student && !environment.production) {
+      student = {
+        id: 6192449487634432,
+        email: 'admin',
+        firstName: 'admin',
+        lastName: 'admin',
+      };
+    }
+    return student;
+  }
+
 }
