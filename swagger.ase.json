@@ -1,0 +1,875 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "An API for keeping track of your contacts and the companies they work for. \n\nDon't forget to take it for a spin by clicking on the **Try in Client** button next to each operation! All read operations are public and don't require authentication.\n\n<div>\n<img src='https://thecontactsapi.apispark.net/v1/img/cropped-contact-img.png' width='90%'>\n<div>\n\n<!-- ![](https://thecontactsapi.apispark.net/v1/img/cropped-contact-img.png) -->\n\n",
+    "version" : "1.2.0",
+    "title" : "ASE Attendance API",
+    "termsOfService" : "",
+    "contact" : { }
+  },
+  "host" : "ase-2017-group-2-9-attendance.restlet.io",
+  "schemes" : [ "https" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "security" : [ {
+    "HTTP_BASIC" : [ ]
+  } ],
+  "paths" : {
+    "/groups/" : {
+      "get" : {
+        "tags" : [ "Groups" ],
+        "summary" : "Get the list of Groups",
+        "description" : "Loads a list of Groups",
+        "parameters" : [ {
+          "name" : "$size",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Size of the page to retrieve.",
+          "x-example" : 10
+        }, {
+          "name" : "$page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Number of the page to retrieve.",
+          "x-example" : 1
+        }, {
+          "name" : "$sort",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Order in which to retrieve the results. Multiple sort criteria can be passed.",
+          "x-example" : "name DESC"
+        }, {
+          "name" : "free",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "Allows to filter the collections of groups whether they are free",
+          "x-example" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Group"
+              }
+            },
+            "examples" : {
+              "application/json" : "[{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"birthday\": 152755200000,\n  \"active\": true,\n  \"rank\": 1,\n  \"company\": \"0e8cedd0-ad98-11e6-bf2e-47644ada7c0f\"\n}]"
+            },
+            "headers" : {
+              "X-Page-Count" : {
+                "type" : "integer",
+                "x-example" : 1
+              },
+              "X-Page-Number" : {
+                "type" : "integer",
+                "x-example" : 1
+              },
+              "X-Page-Size" : {
+                "type" : "integer",
+                "x-example" : 25
+              },
+              "X-Total-Count" : {
+                "type" : "integer",
+                "x-example" : 2
+              }
+            }
+          },
+          "400" : {
+            "description" : "Status 400",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        },
+        "security" : [ ]
+      },
+      "post" : {
+        "tags" : [ "Groups" ],
+        "summary" : "Create a Group",
+        "description" : "Adds a Contact",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Group"
+          },
+          "x-examples" : {
+            "application/json" : "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"active\": true,\n  \"rank\": 1,\n  \"company\": \"0e8cedd0-ad98-11e6-bf2e-47644ada7c0f\"\n}"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created Group",
+            "schema" : {
+              "$ref" : "#/definitions/Group"
+            },
+            "examples" : {
+              "application/json" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"birthday\": 152755200000,\n  \"active\": true,\n  \"rank\": 1,\n  \"company\": \"0e8cedd0-ad98-11e6-bf2e-47644ada7c0f\"\n}"
+            }
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      }
+    },
+    "/groups/{groupid}" : {
+      "get" : {
+        "tags" : [ "Groups" ],
+        "summary" : "Load an individual Group",
+        "description" : "Loads a Group",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Group"
+            },
+            "examples" : {
+              "application/json" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"birthday\": 152755200000,\n  \"active\": true,\n  \"rank\": 1,\n  \"company\": \"0e8cedd0-ad98-11e6-bf2e-47644ada7c0f\"\n}"
+            }
+          },
+          "400" : {
+            "description" : "Status 400",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        },
+        "security" : [ ]
+      },
+      "put" : {
+        "tags" : [ "Groups" ],
+        "summary" : "Update a Group",
+        "description" : "Stores a Group",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Group"
+          },
+          "x-examples" : {
+            "application/json" : "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"birthday\": 152755200000,\n  \"active\": true,\n  \"rank\": 1,\n  \"company\": \"0e8cedd0-ad98-11e6-bf2e-47644ada7c0f\"\n}"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Group"
+            },
+            "examples" : {
+              "application/json" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"birthday\": 152755200000,\n  \"active\": true,\n  \"rank\": 1,\n  \"company\": \"0e8cedd0-ad98-11e6-bf2e-47644ada7c0f\"\n}"
+            }
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "Groups" ],
+        "summary" : "Delete a Group",
+        "description" : "Deletes a Group",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          },
+          "400" : {
+            "description" : "No Group present"
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "groupid",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "description" : "Identifier of the Contact",
+        "x-example" : "0e8dd830-ad98-11e6-bf2e-47644ada7c0f"
+      } ]
+    },
+    "/groups/{groupid}/students" : {
+      "get" : {
+        "tags" : [ "Groups", "Student" ],
+        "summary" : "Get the users in a group",
+        "parameters" : [ {
+          "name" : "$sort",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Order in which to retrieve the results. Multiple sort criteria can be passed",
+          "x-example" : "firstname ASC"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Student"
+              }
+            }
+          }
+        },
+        "security" : [ ]
+      },
+      "post" : {
+        "tags" : [ "Groups", "Student" ],
+        "summary" : "Add a student to the group",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Student"
+          },
+          "x-examples" : {
+            "application/json" : "{\n  \"firstName\": \"Max\",\n  \"lastName\": \"Musterman\",\n  \"id\": \"234890jas-asd092-sadasd\",\n  \"email\": \"max.musterman@tum.de\"\n}"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Add new Student in Group",
+            "schema" : {
+              "$ref" : "#/definitions/Student"
+            },
+            "examples" : {
+              "application/json" : "{\n  \"firstName\": \"Max\",\n  \"lastName\": \"Musterman\",\n  \"id\": \"234890jas-asd092-sadasd\",\n  \"email\": \"max.musterman@tum.de\"\n}"
+            }
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "groupid",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/groups/{groupid}/students/{studentid}" : {
+      "get" : {
+        "tags" : [ "Groups", "Student" ],
+        "summary" : "Get an individual user from the group",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Student"
+            }
+          }
+        },
+        "security" : [ ]
+      },
+      "delete" : {
+        "tags" : [ "Groups", "Student" ],
+        "summary" : "Delete a user from the group",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      },
+      "parameters" : [ {
+        "name" : "groupid",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      }, {
+        "name" : "studentid",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/groups/findByStudent" : {
+      "get" : {
+        "tags" : [ "Groups" ],
+        "summary" : "Finds Groups by Student",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Group"
+              }
+            }
+          }
+        },
+        "security" : [ ]
+      }
+    },
+    "/groups/students" : {
+      "get" : {
+        "summary" : "Get registered users in any groups",
+        "parameters" : [ {
+          "name" : "$size",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Size of the page to retrieve."
+        }, {
+          "name" : "$page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Number of the page to retrieve."
+        }, {
+          "name" : "$sort",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Order in which to retrieve the results. Multiple sort criteria can be passed.",
+          "x-example" : "firstname DESC"
+        }, {
+          "name" : "X-Page-Count",
+          "in" : "header",
+          "required" : false,
+          "type" : "integer",
+          "x-example" : 1
+        }, {
+          "name" : "X-Page-Number",
+          "in" : "header",
+          "required" : false,
+          "type" : "integer",
+          "description" : "1"
+        }, {
+          "name" : "X-Page-Size",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "25"
+        }, {
+          "name" : "X-Total-Count",
+          "in" : "header",
+          "required" : false,
+          "type" : "integer",
+          "x-example" : 2
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Student"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Status 400"
+          }
+        },
+        "security" : [ ]
+      }
+    },
+    "/student/" : { },
+    "/student/auth" : {
+      "post" : {
+        "tags" : [ "Student" ],
+        "summary" : "logs the student into the system",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully logged in",
+            "schema" : {
+              "$ref" : "#/definitions/Student"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized Access"
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      }
+    },
+    "/student/logout" : {
+      "delete" : {
+        "summary" : "Logs out the current logged in student session",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully logged out"
+          },
+          "400" : {
+            "description" : "Not logged in"
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      }
+    },
+    "/student/{studentid}/qr" : {
+      "get" : {
+        "summary" : "Get the student QR Code",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/QrCode"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "studentid",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/student/register" : {
+      "post" : {
+        "summary" : "Register a new Student",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UserData"
+          },
+          "x-examples" : {
+            "application/json" : " { \n   \"firstName\" :\"Max\",\n  \"lastName\": \"Muster\",\n  \"email\": \"max.muster@tum.de\",\n  \"password\" : \"password\"\n}"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Status 201",
+            "schema" : {
+              "$ref" : "#/definitions/Student"
+            }
+          }
+        },
+        "security" : [ ]
+      },
+      "put" : {
+        "summary" : "Update a Student",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Student"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Student"
+            }
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      }
+    },
+    "/records/" : {
+      "get" : {
+        "tags" : [ "Record" ],
+        "summary" : "Get Attendance records",
+        "parameters" : [ {
+          "name" : "$size",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "max number to return"
+        }, {
+          "name" : "$weekId",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "filter by Week"
+        }, {
+          "name" : "$sort",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "sort by value",
+          "x-example" : "weekId asc"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/AttendanceRecord"
+              }
+            }
+          }
+        },
+        "security" : [ ]
+      },
+      "post" : {
+        "tags" : [ "Record" ],
+        "summary" : "Add Attendance Record",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/AttendanceRecord"
+            }
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Status 201"
+          },
+          "401" : {
+            "description" : "Status 401"
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      }
+    },
+    "/records/{attendanceid}/" : {
+      "get" : {
+        "tags" : [ "Record" ],
+        "summary" : "Get specific attendance record",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/AttendanceRecord"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Record" ],
+        "summary" : "Update a attendance record",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AttendanceRecord"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        },
+        "security" : [ {
+          "HTTP_BASIC" : [ ]
+        } ]
+      },
+      "delete" : {
+        "summary" : "Remove a specific attendane record",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "attendanceid",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/records/groups/{groupId}" : {
+      "get" : {
+        "summary" : "Get All records of a group",
+        "parameters" : [ {
+          "name" : "$size",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "$pages",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "number of pages"
+        }, {
+          "name" : "$sort",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Sort by attribute",
+          "x-example" : "week ASC"
+        }, {
+          "name" : "$filter",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Filter by attribute",
+          "x-example" : "weekId=value"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/AttendanceRecord"
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "groupId",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/records/students/{studentId}" : {
+      "get" : {
+        "summary" : "Get all records for a student",
+        "parameters" : [ {
+          "name" : "$size",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "max elements"
+        }, {
+          "name" : "$sort",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Sort by atrribute",
+          "x-example" : "weekId ASC"
+        }, {
+          "name" : "$filter",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "filter by attribute value",
+          "x-example" : "weekId = value"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/AttendanceRecord"
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "studentId",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/records/qr/{studentId}/" : {
+      "get" : {
+        "summary" : "Get a personalized qr code as base64 string",
+        "parameters" : [ {
+          "name" : "$width",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "the desired with in pixels"
+        }, {
+          "name" : "$height",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "the desired with in pixels"
+        }, {
+          "name" : "$size",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "(width/height)"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/QrCode"
+            },
+            "examples" : {
+              "application/json" : "Qr code with content"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "studentId",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    }
+  },
+  "securityDefinitions" : {
+    "HTTP_BASIC" : {
+      "description" : "All GET methods are public, meaning that *you can read all the data*. Write operations require authentication and therefore are forbidden to the general public.",
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "Error" : {
+      "type" : "object",
+      "required" : [ "code" ],
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "minimum" : 400,
+          "maximum" : 599
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Bad query parameter [$size]: Invalid integer value [abc]"
+        },
+        "reasonPhrase" : {
+          "type" : "string",
+          "example" : "Bad Request"
+        }
+      },
+      "description" : "This general error structure is used throughout this API.",
+      "example" : "{\n  \"code\": 400,\n  \"description\": \"Bad query parameter [$size]: Invalid integer value [abc]\",\n  \"reasonPhrase\": \"Bad Request\"\n}"
+    },
+    "Group" : {
+      "type" : "object",
+      "required" : [ "id", "maxSlots" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "description" : "Auto-generated primary key field",
+          "example" : 234234234234234240000
+        },
+        "maxSlots" : {
+          "type" : "integer",
+          "description" : "the maximum students a group can contain",
+          "default" : 5
+        },
+        "students" : {
+          "type" : "array",
+          "description" : "This property is a reference to registered student for this group",
+          "items" : {
+            "type" : "integer"
+          },
+          "example" : "234234234234234234234234"
+        }
+      },
+      "description" : "A representation of a Contact.",
+      "example" : "{\n  \"id\": \"241241241241241241\",\n  \"maxSlots\": 5,\n  \"students\": [\n    \"143124124124124\",\n    \"124124124124124124124\"\n    ]\n}"
+    },
+    "UserData" : {
+      "type" : "object",
+      "required" : [ "email", "firstName", "lastName", "password" ],
+      "properties" : {
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "integer"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      },
+      "example" : "{\n  \"firstName\" :\"Max\",\n  \"lastName\": \"Muster\",\n  \"email\": \"max.muster@tum.de\",\n  \"password\" : \"password\"\n}"
+    },
+    "Student" : {
+      "type" : "object",
+      "properties" : {
+        "firstName" : {
+          "type" : "string",
+          "description" : "The first name of the student"
+        },
+        "lastName" : {
+          "type" : "string",
+          "description" : "The last name of the student"
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "The user's email account"
+        },
+        "id" : {
+          "type" : "integer",
+          "description" : "The Id of the user"
+        }
+      },
+      "example" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"firstName\": \"Max\",\n  \"lastName\": \"Mustermann\",\n  \"email\": \"max.mustermann@tum.de\"\n}"
+    },
+    "QrCode" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AttendanceRecord" : {
+      "type" : "object",
+      "properties" : {
+        "attendance_id" : {
+          "type" : "string"
+        },
+        "student_id" : {
+          "type" : "string"
+        },
+        "tutorial_group_id" : {
+          "type" : "string"
+        },
+        "week_id" : {
+          "type" : "string"
+        },
+        "presented" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  }
+}
